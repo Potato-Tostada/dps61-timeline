@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>District 61 History Timeline</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+/* Layout idea: a horizontal archive strip. Five swim lanes over a shared year axis, enrollment underneath, details beside it, and a filterable event list below. */
+:root {
+  --bg: #f3f5f8;
+  --panel: #ffffff;
+  --ink: #18212f;
+  --muted: #5b6678;
+  --rule: #d6dce5;
+  --accent: #23466e;
+  --c-supt: #4b5aa8;
+  --c-build: #157a78;
+  --c-board: #b03a48;
+  --c-money: #a46a0c;
+  --c-good: #2f7d32;
+  --c-titles: #8a4a9e;
+  --c-mile: #5d6b7e;
+  --lv-champ: #c8961a; --lv-trophy: #8a4a9e; --lv-state: #c2410c; --lv-sect: #1d5fa8; --lv-reg: #2f8f6a; --lv-dist: #9aa3af;
+  --c-enroll: #23466e;
+  --flag: #8a5a00;
+  --flag-bg: #fdf3dc;
+  --display: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --body: "IBM Plex Sans", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #11161e; --panel: #19202b; --ink: #e7ebf1; --muted: #a2adbd; --rule: #2c3644; --accent: #8db4e2;
+    --c-supt: #8e9ae6; --c-build: #4cc0bc; --c-board: #ec7a87; --c-money: #e2a948; --c-good: #72c476; --c-titles: #c79be0; --c-mile: #b3bfcf; --lv-champ: #f1c24a; --lv-trophy: #c79be0; --lv-state: #fb8c55; --lv-sect: #6ea8ec; --lv-reg: #5fc79c; --lv-dist: #7d8794; --c-enroll: #8db4e2;
+    --flag: #f0c46a; --flag-bg: #3a2f15; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #11161e; --panel: #19202b; --ink: #e7ebf1; --muted: #a2adbd; --rule: #2c3644; --accent: #8db4e2;
+  --c-supt: #8e9ae6; --c-build: #4cc0bc; --c-board: #ec7a87; --c-money: #e2a948; --c-good: #72c476; --c-titles: #c79be0; --c-mile: #b3bfcf; --lv-champ: #f1c24a; --lv-trophy: #c79be0; --lv-state: #fb8c55; --lv-sect: #6ea8ec; --lv-reg: #5fc79c; --lv-dist: #7d8794; --c-enroll: #8db4e2;
+  --flag: #f0c46a; --flag-bg: #3a2f15; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--bg); color: var(--ink); font: 15px/1.5 var(--body); }
+header, main, footer { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
+header { padding-top: 28px; padding-bottom: 8px; }
+h1 { font: 700 30px/1.15 var(--display); margin: 0 0 6px; text-wrap: balance; }
+h2 { font: 600 20px/1.2 var(--display); margin: 0 0 10px; text-wrap: balance; }
+.lede { color: var(--muted); max-width: 72ch; margin: 0; }
+.controls { display: flex; flex-wrap: wrap; gap: 18px 28px; align-items: flex-start; margin: 18px 0 12px; }
+.group { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.group-label { font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin-right: 4px; }
+.chip { display: inline-flex; align-items: center; gap: 7px; padding: 5px 11px; border: 1px solid var(--rule); border-radius: 999px; background: var(--panel); color: var(--ink); font: 500 13px var(--body); cursor: pointer; }
+.chip .sw { width: 10px; height: 10px; border-radius: 50%; background: var(--c); }
+.chip[aria-pressed="false"] { opacity: .45; }
+.chip[aria-pressed="false"] .sw { background: transparent; border: 1.5px solid var(--c); }
+.chip:focus-visible, button:focus-visible, a:focus-visible, .row:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.seg button { border: 1px solid var(--rule); background: var(--panel); color: var(--ink); font: 500 13px var(--body); padding: 5px 11px; cursor: pointer; }
+.seg button:first-child { border-radius: 6px 0 0 6px; }
+.seg button:last-child { border-radius: 0 6px 6px 0; }
+.seg button + button { border-left: 0; }
+.seg button[aria-pressed="true"] { background: var(--accent); color: var(--panel); border-color: var(--accent); }
+.search { padding: 5px 10px; border: 1px solid var(--rule); border-radius: 6px; background: var(--panel); color: var(--ink); font: 13px var(--body); width: 200px; }
+.layout { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 16px; align-items: start; }
+@media (max-width: 980px) { .layout { grid-template-columns: 1fr; } }
+.card { background: var(--panel); border: 1px solid var(--rule); border-radius: 8px; }
+.chart-wrap { overflow-x: auto; padding: 8px 0 4px; }
+svg text { font-family: var(--body); }
+.lane-label { font: 600 12px var(--body); fill: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
+.axis text { font-size: 11px; fill: var(--muted); font-variant-numeric: tabular-nums; }
+.grid line { stroke: var(--rule); }
+.mark { cursor: pointer; }
+.mark:focus { outline: none; }
+.mark:focus-visible .shape, .mark.sel .shape { stroke: var(--ink); stroke-width: 2.5; }
+.mark .shape { stroke: var(--panel); stroke-width: 1.2; }
+.mark.dim { opacity: .18; }
+.supt-label { font-size: 11px; fill: #fff; pointer-events: none; }
+.detail { padding: 16px 18px; position: sticky; top: 12px; min-height: 220px; }
+.detail .kicker { display: flex; gap: 8px; align-items: center; font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
+.detail .date { font: 600 15px var(--body); margin: 8px 0 2px; font-variant-numeric: tabular-nums; }
+.detail h3 { font: 600 19px/1.25 var(--display); margin: 2px 0 8px; text-wrap: balance; }
+.detail p { margin: 0 0 10px; }
+.detail .src { font-size: 13px; color: var(--muted); }
+.detail a { color: var(--accent); }
+.flag { background: var(--flag-bg); color: var(--flag); border-radius: 6px; padding: 8px 10px; font-size: 13px; margin-top: 8px; }
+.flag strong { font-weight: 600; }
+.dot { width: 9px; height: 9px; border-radius: 50%; background: var(--c); display: inline-block; }
+.legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: 12px; color: var(--muted); padding: 4px 16px 12px; }
+.legend span { display: inline-flex; gap: 6px; align-items: center; }
+.tip { position: fixed; pointer-events: none; background: var(--ink); color: var(--bg); font-size: 12px; padding: 5px 8px; border-radius: 5px; max-width: 280px; z-index: 5; display: none; }
+.list { margin: 18px 0 28px; }
+.list .head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 14px 18px 6px; flex-wrap: wrap; }
+.count { color: var(--muted); font-size: 13px; }
+.rows { max-height: 520px; overflow-y: auto; border-top: 1px solid var(--rule); }
+.row { display: grid; grid-template-columns: 120px 150px minmax(0, 1fr); gap: 12px; padding: 9px 18px; border-bottom: 1px solid var(--rule); cursor: pointer; align-items: baseline; }
+.row:hover, .row.sel { background: color-mix(in srgb, var(--accent) 8%, transparent); }
+.row .d { font-variant-numeric: tabular-nums; color: var(--muted); font-size: 13px; }
+.row .c { font-size: 12px; display: inline-flex; gap: 6px; align-items: center; color: var(--muted); }
+.row .t { font-weight: 500; }
+.row .t small { display: block; font-weight: 400; color: var(--muted); }
+@media (max-width: 640px) { .row { grid-template-columns: 1fr; gap: 2px; } }
+footer { color: var(--muted); font-size: 13px; padding-bottom: 32px; }
+footer p { max-width: 90ch; }
+@media (prefers-reduced-motion: no-preference) { .mark .shape { transition: opacity .15s; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>Decatur Public Schools District 61, 1855 to 2026</h1>
+  <p class="lede">Founding milestones, superintendents, buildings, board votes, strikes, sports and activities, money and good news on one timeline, with K-12 enrollment underneath. Click any mark or list row for its date, a one-line description and its source. Items marked <em>Unconfirmed</em> or <em>Estimate</em> are flagged that way in the board's research file.</p>
+  <div class="controls">
+    <div class="group" id="cats"><span class="group-label">Show</span></div>
+    <div class="group" id="lvls"><span class="group-label">Sports levels</span></div>
+    <div class="group"><span class="group-label">Years</span><div class="seg" id="ranges"></div></div>
+    <div class="group"><label class="group-label" for="q">Find</label><input id="q" class="search" type="search" placeholder="School, person, vote…"></div>
+  </div>
+</header>
+<main>
+  <div class="layout">
+    <div class="card">
+      <div class="chart-wrap" id="chartWrap"><svg id="chart" role="img" aria-label="Timeline of District 61 events with enrollment below"></svg></div>
+      <div class="legend">
+        <span><svg width="12" height="12"><path d="M6 1 L11 11 L1 11 Z" fill="var(--c-build)"/></svg>Building opens</span>
+        <span><svg width="12" height="12"><rect x="1.5" y="1.5" width="9" height="9" fill="var(--c-build)"/></svg>Building closes</span>
+        <span><svg width="12" height="12"><path d="M2 2 L10 10 M10 2 L2 10" stroke="var(--c-build)" stroke-width="3"/></svg>Demolished or sold</span>
+        <span><svg width="12" height="12"><circle cx="6" cy="6" r="5" fill="var(--muted)"/></svg>Event</span>
+        <span><svg width="14" height="14"><polygon points="7,0 8.8,4.6 13.7,4.8 9.9,7.9 11.2,12.6 7,9.9 2.8,12.6 4.1,7.9 0.3,4.8 5.2,4.6" fill="var(--c-titles)"/></svg>State champion</span>
+        <span><svg width="22" height="12"><rect x="1" y="3" width="20" height="6" rx="2" fill="var(--muted)"/></svg>Span of years</span>
+        <span>Before 1960 the axis is compressed in the full view.</span>
+      </div>
+    </div>
+    <aside class="card detail" id="detail" aria-live="polite"></aside>
+  </div>
+  <section class="card list">
+    <div class="head"><h2>All events</h2><span class="count" id="count"></span></div>
+    <div class="rows" id="rows" role="list"></div>
+  </section>
+</main>
+<footer>
+  <p>Source for every entry: <a href="https://claude.ai/artifact/Krjgy4QvroQwricnJJ8Y7R">Decatur Public Schools District 61: Deep Dive</a> (board research file, November 2026), which cites each item. Newspapers.com links need a login. Enrollment: Herald and Review (1970), Decatur Daily Review (1979), and Business Information Services, Demographics and Enrollment Projection Study, draft 2, Figure 90; the study projects about 6,730 students by 2035-36. Graduation rates: Illinois Report Card.</p>
+  <p>Sports and activities: every top-four state finish (40) plus every regional, sectional, super-sectional, district, state-qualifier and playoff result, one entry per school, sport and season, colour-coded by the furthest level reached in the Illinois High School Association's Team Titles summary for Decatur High/Stephen Decatur, Eisenhower and MacArthur. Individual state champions are not included. Strikes are listed under each union's name. Integration and busing entries added from the Decatur Herald and Herald and Review, November 2026. Prepared for the Board of Education, November 2026.</p>
+</footer>
+<div class="tip" id="tip"></div>
+<script>
+const NP = id => "https://www.newspapers.com/image/" + id + "/";
+const U = {
+  garf: "https://dnrhistoric.illinois.gov/content/dam/soi/en/web/dnrhistoric/documents/Decautur%20-%20Garfield%20School.pdf",
+  sdhs: "https://en.wikipedia.org/wiki/Stephen_Decatur_High_School_(Decatur,_Illinois)",
+  ww: "https://herald-review.com/news/local/education/decatur-school-board-council-considering-agreement-to-demolish-woodrow-wilson-school/article_601ad272-7815-11ed-b428-a36acb3bee01.html",
+  bold: "https://herald-review.com/news/local/education/watch-now-2-decatur-schools-to-close/article_4796a880-0268-5cb4-bf5f-54986f700c94.html",
+  boldSched: "https://herald-review.com/news/local/education/article_32d8fe40-125f-5e56-a902-95e41c467f4f.html",
+  boldCost: "https://newschannel20.com/features/reality-check/reality-check-what-will-happen-to-empty-school-buildings-in-decatur",
+  dennis: "https://illinoisnewsroom.org/decatur-public-schools-temporarily-closes-2-campuses-over-structural-concerns/",
+  ehs: "https://www.wandtv.com/news/38m-ehs-renovation-in-the-home-stretch/article_b1b28443-feb0-5dae-936e-74f2f1d1f875.html",
+  lp1: "https://www.wandtv.com/news/dps61-school-board-members-suggest-reconsidering-lincoln-park-site-for-new-school/article_45af43fa-024f-11ed-8e6c-7bb285375251.html",
+  lp2: "https://www.wandtv.com/news/dps-will-not-build-new-school-in-lincoln-park/article_2687467e-0d1e-11ed-a182-f7a3f2e8c949.html",
+  dansby: "https://www.wandtv.com/news/isbe-approves-dps61-proposal-for-new-american-dreamer-stem-academy-school/article_77bc6288-2efa-11ed-bcc2-0fc4d3940b47.html",
+  modular: "https://ipmnewsroom.org/?p=57071",
+  hazards: "https://www.wandtv.com/news/dps61-continues-discussion-on-fate-of-buildings-that-are-immediate-hazards/article_0bd25214-6fec-11ef-9858-93d31d496bdd.html",
+  ballot: "https://ballotpedia.org/Macon_County_School_Sales_Tax_Increase_(November_2010)",
+  oma21: "https://www.wandtv.com/news/investigation-finds-dps-board-violated-open-meetings-act-during-multiple-meetings/article_d48857de-81da-11eb-9ed6-733ee4bdefbb.html",
+  oma22: "https://www.iasb.com/policy-services-and-school-law/court-decisions-listing/public-access-opinion-22-012",
+  audio: "https://www.wandtv.com/news/dps61-releases-audio-of-16-closed-meetings-per-ag-order/article_e7ad12fa-438a-11ed-b28b-236ddb0bc733.html",
+  ew99: "https://www.edweek.org/leadership/after-jacksons-arrest-both-sides-in-decatur-file-suits/1999/11",
+  ew00: "https://www.edweek.org/leadership/u-s-judge-upholds-expulsions-in-decatur/2000/01",
+  coint: "https://will.illinois.edu/news/story/decatur-school-board-names-two-co-interims-to-fill-in-for-departing-supt.-t",
+  fregeau: "https://www.wandtv.com/news/paul-fregeau-named-as-new-decatur-public-schools-superintendent/article_c2adb4a3-977a-5fe3-b071-8b1c3c3aa3a0.html",
+  fregeauLeaves: "https://herald-review.com/news/local/education/fregeau-leaving-decatur-public-schools-for-superintendent-position-in-missouri/article_c49ce720-a230-5fa2-a7c9-97900d3e1c0d.html",
+  williams: "https://www.wandtv.com/news/bobbi-williams-chosen-as-interim-dps-superintendent/article_d504b9b6-c8af-11eb-8762-831e3f2c95bf.html",
+  clark: "https://il50010903.schoolwires.net/Page/75",
+  moody: "https://ipmnewsroom.org/decatur-public-schools-selects-next-superintendent/",
+  ew01: "https://www.edweek.org/education/people-in-the-news/2001/05",
+  grant: "http://omeka.decaturlibrary.org/items/show/237",
+  eiu: "https://thekeep.eiu.edu/theses/3290/",
+  ilissues: "https://www.lib.niu.edu/1984/ii840115.html",
+  dispatch: "https://thedecaturdispatch.substack.com/p/decatur-public-school-board-meeting",
+  demog: "https://ipmnewsroom.org/decatur-public-schools-looking-for-ways-to-turn-around-bleak-decline-in-student-population/",
+  budget: "https://www.wandtv.com/2026/09/23/decatur-public-school-board-approves-districts-2026-27-budget/",
+  contract: "https://nowdecatur.com/?p=281537",
+  rc26: "https://www.wandtv.com/2026/11/11/decatur-schools-report-higher-graduation-rate-lower-absenteeism-2026-report-card/",
+  rc: "https://www.illinoisreportcard.com/District.aspx?districtId=39055061025",
+  cp1: "https://citizenportal.ai/articles/5826644/Illinois/Decatur-Public-Schools-Reduces-Teacher-Vacancies-and-Welcomes-New-International-Educators",
+  cp2: "https://citizenportal.ai/articles/6006814/illinois/school-boards/decatur-sd-61/decatur-sd-61-says-teacher-vacancies-fell-to-47-44-international-hires-planned",
+  cp3: "https://citizenportal.ai/articles/7085512/illinois/school-boards/decatur-sd-61/public-praise-and-operational-update-for-decatur-sd-61-international-teacher-program",
+  cp4: "https://cpo.soar.com/articles/7874067/Illinois/Decatur-SD-61-board-approves-multiple-hires-contracts-and-facility-projects",
+  wandIntl: "https://www.wandtv.com/2026/09/16/international-teachers-find-their-place-decatur-classrooms/",
+  fac: "https://app.fac.gov/dissemination/search/",
+  audit22: "https://resources.finalsite.net/images/v1769426066/gkgx4ss74zyru1uuxnh3/dpsannualfinancialreport.pdf",
+  boarddocs: "https://www.dps61.org/our-district/meet-the-board/board-meeting-dates-documents",
+  fs18: "https://www.dps61.org/fs/resource-manager/view/00d6d29a-8cfe-460f-90e8-7daaa29bd025",
+  fs20: "https://www.dps61.org/fs/resource-manager/view/14cc0ee6-13d9-4528-b213-441a0e57a7e4",
+  a21: "https://www.dps61.org/fs/resource-manager/view/6ca8992a-7166-4772-a6d2-0bddb0702230",
+  a22: "https://www.dps61.org/fs/resource-manager/view/88e65cc6-c26e-4c5e-8305-92a75c70a152",
+  a23: "https://www.dps61.org/fs/resource-manager/view/784e2647-ac46-4f93-8edc-71bc2e9a9f70",
+  a25: "https://drive.google.com/file/d/1VhtS40rrp3BYv_MjLySGsd8UtSSQePBx/view",
+  bound: "https://herald-review.com/news/local/decatur-school-board-explores-boundaries/article_637379c3-25b4-52c2-8b54-398547a18533.html",
+  lakeview: "https://herald-review.com/news/local/education/21-photos-of-decatur-high-school-activities-through-the-years/collection_85b6dcb0-ad46-5569-b01c-df5222cad6fc.html"
+};
+
+const CATS = [
+  { id: "supt", name: "Superintendents", color: "var(--c-supt)" },
+  { id: "mile", name: "Milestones", color: "var(--c-mile)" },
+  { id: "build", name: "Buildings", color: "var(--c-build)" },
+  { id: "board", name: "Board votes and controversies", color: "var(--c-board)" },
+  { id: "money", name: "Money", color: "var(--c-money)" },
+  { id: "sports", name: "Sports and activities", color: "var(--c-titles)" },
+  { id: "good", name: "Good news", color: "var(--c-good)" }
+];
+const CAT = Object.fromEntries(CATS.map(c => [c.id, c]));
+// Sports levels, colour-coded
+const LV = {
+  champ: { name: "State champion", color: "var(--lv-champ)", r: 6, star: true },
+  trophy: { name: "State trophy (2nd to 4th)", color: "var(--lv-trophy)", r: 6 },
+  state: { name: "State finals or super-sectional", color: "var(--lv-state)", r: 5 },
+  sect: { name: "Sectional title", color: "var(--lv-sect)", r: 4.2 },
+  reg: { name: "Regional title", color: "var(--lv-reg)", r: 3.6 },
+  dist: { name: "District title, state qualifier or playoffs", color: "var(--lv-dist)", r: 3 }
+};
+function sportLevel(ev) {
+  if (ev.kind && ev.kind.startsWith("lv-")) return ev.kind.slice(3);
+  if (/state champion$/.test(ev.title)) return "champ";
+  if (/(second|third|fourth) in state$/.test(ev.title)) return "trophy";
+  if (/one shot from state/.test(ev.title)) return "state";
+  return null;
+}
+
+// Superintendent terms. y/y2 are decimal years.
+const SUPTS = [
+  ["Enoch A. Gastman", 1862, 1907, "about 1862 to 1907", "Principal of the \"Big Brick\" in 1860, then superintendent for 46 years until his death.", "National Register nomination, Garfield School", U.garf, "The district's list starts him in 1862; the nomination implies 1861."],
+  ["H.B. Wilson", 1907, 1913, "1907 to 1913", "From the district's own list of superintendents.", "Herald & Review, 16 Feb 2005, p. 5 (district list)", NP(77387399), "Rests on the district's 2005 list only."],
+  ["J.O. Engleman", 1913, 1921, "1913 to 1921", "From the district's own list; the Decatur Herald reported his death in 1943.", "Herald & Review, 16 Feb 2005, p. 5 (district list)", NP(77387399), "Rests on the district's 2005 list only."],
+  ["J.J. Richeson", 1921, 1926, "1921 to 1926", "From the district's own list of superintendents.", "Herald & Review, 16 Feb 2005, p. 5 (district list)", NP(77387399), "Rests on the district's 2005 list only."],
+  ["William Harris", 1926, 1944, "1926 to 1944", "From the district's own list of superintendents.", "Herald & Review, 16 Feb 2005, p. 5 (district list)", NP(77387399), "Rests on the district's 2005 list only."],
+  ["William R. McIntosh", 1944, 1950, "1944 to 1950", "From the district's own list of superintendents.", "Herald & Review, 16 Feb 2005, p. 5 (district list)", NP(77387399), "Rests on the district's 2005 list only."],
+  ["Lester J. Grant", 1950, 1967, "1950 to 1967", "Resigned in 1967 after 17 years; retirement dinner 24 May 1967.", "Decatur Public Library", U.grant],
+  ["Dr. Rolland W. Jones", 1967, 1968, "1967 to 1968", "One year in the job; the first master contract with teachers was ratified in April 1968.", "Decatur Herald, 10 Apr 1968 and 10 Dec 1969", NP(88498412)],
+  ["Dr. Harmon A. Baldwin", 1968, 1969.55, "1968 to July 1969", "Presented the 1969 integration plan; resigned in July 1969.", "Decatur Herald, 19 Mar and 10 Dec 1969", NP(92499599)],
+  ["Robert Oakes", 1969.55, 1988, "July 1969 to 1988", "Named on a trial basis during the integration fight, made permanent 9 Dec 1969 at $26,000; led the 1976 desegregation plan. Served 19 years.", "Decatur Herald, 10 Dec 1969", NP(77968295)],
+  ["Walter H. Warfield", 1988, 1992.5, "1988 to 30 June 1992", "Left to lead the Illinois Association of School Administrators; warned of teacher retirements and a hard road to any tax increase.", "Herald & Review, 21 May 1992", null],
+  ["Don Wachter", 1992.47, 1993.5, "July 1992 to 30 June 1993", "Promoted after 35 years in the district; announced a sudden retirement in April 1993.", "Herald & Review, 14 Apr 1993, p. 4", NP(93031779)],
+  ["Roy Ragsdale", 1993.52, 1994.95, "July 1993 to 1994", "Hired from Kentucky at $94,000; left after one year under the state's early retirement incentive.", "Herald & Review, 10 Jul 1993 and 26 Dec 1994", null],
+  ["Charlie Kent Jr. (interim)", 1994.95, 1995.5, "1994 to 1995", "Human resources director serving as interim; also interim in summer 1993.", "Herald & Review, 26 Dec 1994", null],
+  ["Kenneth Arndt", 1995.5, 2001.5, "1 July 1995 to June 2001", "Hired unanimously; tenure marked by the 1999 expulsions and the 2000 high school consolidation. Left for Carpentersville.", "Herald & Review, 12 May 1995, p. 1", NP(77357366)],
+  ["Elmer \"Mac\" McPherson", 2001.5, 2006.5, "July 2001 to 30 June 2006", "Assistant superintendent since 1996; started weeks after more than 100 teacher layoffs.", "Education Week, May 2001", U.ew01],
+  ["Gloria Davis", 2006.5, 2014.2, "1 July 2006 to 2014", "Hired from Dodge City, Kansas; retired in 2014.", "Herald & Review, 19 Apr 2006", null],
+  ["Lisa Taylor", 2014.2, 2016.57, "March 2014 to 29 July 2016", "Promoted from deputy superintendent; the board voted 4-3 in February 2016 not to extend her contract.", "Illinois Public Media", U.coint],
+  ["Bobbi Williams and Mike Dugan (co-interims)", 2016.57, 2017.35, "July 2016 to spring 2017", "Co-interim superintendents for about eight months.", "Illinois Public Media", U.coint],
+  ["Dr. Paul Fregeau", 2017.35, 2021.5, "May 2017 to 30 June 2021", "Five-year contract at $197,000; led the BOLD facilities plan; left a year early for Fox C-6 in Missouri.", "WAND; Herald & Review", U.fregeau],
+  ["Bobbi Williams (interim)", 2021.44, 2022.1, "June 2021 to February 2022", "Appointed 8 June 2021 on a 6-1 vote; contract limited to 120 work days.", "WAND", U.williams],
+  ["Dr. Rochelle Clark", 2022.1, 2026.47, "8 February 2022 to June 2026", "Appointed from within after serving as assistant superintendent of support services; retired.", "District page", U.clark],
+  ["Dr. Nicole Nash Moody", 2026.5, 2026.88, "July 2026 to present", "Came from Springfield District 186; hired unanimously on 24 Feb 2026; starting salary $237,500.", "IPM News", U.moody]
+];
+
+// Events: [date label, decimal year, end year or null, cats, kind, title, description, source label, url, flag]
+// kind for buildings: open | close | demo ; others: event
+const E = [
+  // Buildings
+  ["26 June 1968", 1968.48, null, ["build"], "close", "Riverside and Warren schools to close", "By June 1968 the board had decided to close Riverside and Warren; in July it refused parents' request to reopen Riverside.", "Decatur Daily Review, 26 Jun 1968, p. 44", NP(88477998)],
+  ["18 March 1969", 1969.21, null, ["build"], "close", "Jackson Street School eliminated", "The integration plan ended Jackson Street School, which held special education classes and could not meet the life safety code.", "Decatur Herald, 20 Mar 1969, p. 3", NP(92501383), "No closing-day story found; 1968-69 as its last year is inferred."],
+  ["8 July 1969", 1969.52, null, ["build"], "demo", "Warren School sold to be razed", "Sold to the Decatur Housing Authority for $37,500, to be razed for apartments for the elderly.", "Decatur Daily Review, 9 Jul 1969, p. 50", NP(86868983)],
+  ["9 June 1970", 1970.44, null, ["build"], "demo", "Pugh and Oakland approved for razing", "The board approved razing Pugh (built 1895) and Oakland (1896); demolition was being readied that July.", "Decatur Herald, 14 Jul 1970, p. 18", NP(77985735)],
+  ["3 June 1975", 1975.42, null, ["build"], "close", "Gastman School closes", "Gastman (built 1903) held its last full day of classes; it was demolished in 1980.", "Decatur Daily Review, 3 Jun 1975, p. 24", null],
+  ["1975", 1975.5, null, ["build"], "close", "Eldorado and Excelsior close; Baum replaces them", "Eldorado (1938) and Excelsior closed as the new Baum School replaced them.", "Decatur Herald, 28 Sep 1977, p. 3", NP(77534917), "The month Excelsior closed is not known."],
+  ["Fall 1975", 1975.7, null, ["build"], "open", "Stephen Decatur High moves to a new north-side campus", "The 1911 downtown high school at 400 N. Franklin was vacated when the school moved north. The new one-level campus was the first Decatur high school accessible to students with disabilities and the first with air conditioning.", "Wikipedia, Stephen Decatur High School", U.sdhs],
+  ["1976", 1976.6, null, ["build"], "close", "Ullrich School closes", "Closed under the desegregation plan; it was 85% Black and its pupils went to Baum, Franklin, Oak Grove and Lincoln.", "Decatur Daily Review, 12 May 1976, p. 36", NP(77633398)],
+  ["27 September 1977", 1977.74, null, ["build"], "demo", "Eldorado School sold", "The board sold Eldorado to Glad Tidings Assembly of God for $36,500.", "Decatur Herald, 28 Sep 1977, p. 3", NP(77534917)],
+  ["1977", 1977.5, null, ["build"], "demo", "1911 high school demolished", "The original Stephen Decatur High School building was demolished for the Civic Center.", "Herald & Review century timeline, 28 Mar 1999", null],
+  ["1979", 1979.45, null, ["build"], "close", "Woodrow Wilson Junior High closes", "Built in 1932 and closed in 1979; the closing was upheld 4-3 in May 1979.", "Decatur Herald, 9 May 1979, p. 3", NP(84597149)],
+  ["1980", 1980.5, null, ["build"], "demo", "Gastman demolished", "The 1903 Gastman building at 210 W. North St. was demolished.", "Herald & Review, 28 Aug 1993", null],
+  ["Late 1980", 1980.83, null, ["build"], "demo", "Riverside demolished", "Riverside School, closed in 1968, was demolished.", "Headline of 30 Oct 1980, per research file", null],
+  ["23 February 1982", 1982.15, null, ["build", "board"], "close", "Lakeview High and four elementaries closed by one vote", "The board closed Lakeview High School and the Lincoln, Roach, Grant and Oglesby elementaries.", "Herald & Review, 24 Feb 1982, p. 3", NP(87729645), "Alumni say a citizens committee recommended closing Eisenhower instead and that ADM's interest decided it. That is their claim, not an established fact. The year Oglesby was demolished is not known."],
+  ["1989", 1989.5, null, ["build"], "close", "Spencer School closes", "Spencer closed; the board sold it to ADM for $200,000 in August 1991.", "Herald & Review, 26 May 1990 and 14 Aug 1991", null],
+  ["August 1991", 1991.62, null, ["build"], "demo", "Spencer sold to ADM", "The board sold the Spencer building at 3420 E. Garfield to ADM for $200,000.", "Herald & Review, 14 Aug 1991", null],
+  ["28 July 1992", 1992.57, null, ["build"], "demo", "Lincoln School demolished", "The 1917 Lincoln building was demolished for a playground.", "Herald & Review, 29 Jul 1992", null],
+  ["July 1997", 1997.53, null, ["build"], "close", "Coppenbarger (formerly Centennial) closes", "Locked for the last time in July 1997.", "Herald & Review, 5 Feb and 15 Jul 1997", null],
+  ["June 2000", 2000.45, null, ["build"], "close", "Roosevelt Middle and Stephen Decatur High close", "Roosevelt closed after 79 years and Stephen Decatur High closed, leaving the city two high schools.", "Herald & Review, 13 Mar 2000", null],
+  ["2000", 2000.6, null, ["build"], "close", "Durfee Magnet moves into the Garfield building", "Durfee left its original building at Jasper and Grand.", "National Register nomination, Garfield School", U.garf, "The 2000 date for the original building's closing is an inference."],
+  ["2001", 2001.6, null, ["build"], "open", "Stephen Decatur reopens as a middle school", "The former high school reopened as Stephen Decatur Middle School.", "Research file, closures section", null],
+  ["June 2003", 2003.45, null, ["build"], "close", "Sunnyside School closes", "Sunnyside, which served students with profound disabilities, closed at the end of 2002-03.", "Herald & Review, 9 May 2003", null],
+  ["5 January 2004", 2004.01, null, ["build", "board"], "demo", "City takes Mound and Sunnyside for a Target", "The city took ownership of the Mound and Sunnyside sites for a Target store and leased Mound back to finish the year.", "Herald & Review, 8 Jan 2004", null],
+  ["May 2005", 2005.4, null, ["build"], "close", "Southeast and Washington close", "Closed after a December 2004 vote; Washington held a farewell open house in May 2005.", "Herald & Review, 15 Dec 2004 and 16 May 2005", null],
+  ["August 2005", 2005.62, null, ["build"], "open", "Hope Academy opens", "Hope Academy opened as Southeast and Washington closed.", "Research file, closures section", null],
+  ["August 2006", 2006.62, null, ["build"], "open", "Robertson Charter moves into the former Grant School", "Robertson Charter, opened in 2001 elsewhere, moved into Grant School on North 22nd Street.", "Herald & Review, 7 May and 16 Aug 2006", null],
+  ["18 August 2011", 2011.63, null, ["build", "good"], "open", "Heartland Technical Academy opens at Richland", "Replaced the Decatur Area Technical Academy.", "Herald & Review, 22 Jul 2011", null],
+  ["2012 to 2016", 2012.0, 2016.0, ["build", "good"], "open", "Eisenhower and MacArthur rebuilt in place", "Renovations of $38 million and $34 million, paid from the 2010 county school sales tax.", "WAND", U.ehs],
+  ["26 February 2013", 2013.16, null, ["build"], "close", "Brush College to close", "The board voted to close Brush College at the end of the school year.", "Herald & Review, 27 Feb 2013", null],
+  ["2018 to 2021", 2018.0, 2021.62, ["build"], "close", "BOLD plan: 22 schools to 17", "A $55 to $60 million plan to make Decatur a \"destination district\".", "WICS", U.boldCost, "The cost comes from a search summary the research file did not open in full."],
+  ["August 2019", 2019.62, null, ["build"], "close", "Thomas Jefferson merges into Stephen Decatur; Harris becomes alternative center", "Thomas Jefferson Middle merged into Stephen Decatur Middle; Harris became the alternative education center.", "Herald & Review", U.boldSched],
+  ["2019", 2019.3, null, ["build"], "open", "Baum kept open", "Baum was on the BOLD closure list in 2019 and remains open with 319 students.", "Research file, closures section", null],
+  ["2020", 2020.45, null, ["build"], "close", "Garfield building left vacant", "The Garfield School building has been vacant since 2020.", "National Register nomination, Garfield School", U.garf],
+  ["August 2020", 2020.62, null, ["build"], "open", "Montessori moves into the Thomas Jefferson building", "The combined Montessori program moved into the former Thomas Jefferson building.", "Herald & Review", U.boldSched],
+  ["August 2020", 2020.66, null, ["build"], "close", "French Academy moves; Dennis expands into the French building", "The BOLD schedule moved French Academy to Enterprise and Dennis into the French building.", "Herald & Review", U.boldSched, "The research file rates 2020 as likely."],
+  ["May 2021", 2021.4, null, ["build"], "close", "Oak Grove and Stevenson close; old Johns Hill closes", "Oak Grove students moved to Franklin and Stevenson students to Parsons. The 1929 Johns Hill building closed and was demolished.", "Herald & Review", U.bold],
+  ["August 2021", 2021.62, null, ["build", "good"], "open", "New Johns Hill Magnet opens", "The new Johns Hill building opened under the BOLD plan.", "Herald & Review", U.boldSched],
+  ["About 2022", 2022.9, null, ["build"], "demo", "Woodrow Wilson demolition agreed", "Vacant since 1979, the building was the subject of a district-city demolition agreement more than 40 years later.", "Herald & Review", U.ww, "The research file gives no exact year; placement is approximate."],
+  ["31 May 2023", 2023.41, null, ["build", "board"], "close", "Both Dennis buildings close overnight", "An engineer called in over HVAC and water damage found structural failure at the 1910 and 1914 Dennis buildings; both closed the next day. Inspections in 2013 had found no serious problems.", "IPM News", U.dennis],
+  ["2023", 2023.6, null, ["build", "money"], "open", "Modular classrooms for Dennis students", "Dennis students moved to modular classrooms on the Garfield site, at up to $2 million for one year.", "IPM News", U.modular, "The cost comes from a search summary the research file did not open in full."],
+  ["2024", 2024.7, null, ["build", "money"], "event", "More than $24 million of repairs rated urgent", "Facility items rated urgent or required totalled more than $24 million.", "WAND", U.hazards, "The amount comes from a search summary the research file did not open in full."],
+  ["August 2025", 2025.62, null, ["build", "good"], "open", "Dansby Magnet School opens", "The new building, paid with more than $39 million of federal pandemic aid, took the American Dreamer STEM Academy out of the former Enterprise building.", "WAND; Herald & Review, 8 Aug 2025", U.dansby, "The cost comes from a search summary the research file did not open in full."],
+
+  // Board votes and controversies
+  ["9 April 1968", 1968.27, null, ["board"], "event", "First master contract with teachers", "The board and the teachers ratified their first master contract.", "Decatur Herald, 10 Apr 1968, p. 3", NP(88498412)],
+  ["18 March 1969", 1969.21, null, ["board"], "event", "Integration plan adopted 5-2", "The board adopted the modified Community Commission on Integration plan for the city's 28 elementary schools. John Fick and Vernon Talbott Jr. voted no.", "Decatur Herald, 19 Mar 1969, p. 3", NP(92499599)],
+  ["Spring to fall 1969", 1969.7, null, ["board"], "event", "555 students leave in the plan's first fall", "Enrollment fell by 555 between spring and fall 1969, 455 in grades K-5. The district said it could not tie the loss directly to the plan.", "Herald and Review, 25 Jan 1970, p. 3", NP(77971682)],
+  ["12 May 1970", 1970.36, null, ["board"], "event", "Redistricting cuts busing, 4-3", "A new board majority passed a modified plan that bused 991 fewer students. Fick, Hamilton, Ploeger and Weaver voted yes; Schroeder, Schwandt and Dansby no.", "Decatur Herald, 13 May 1970, p. 3", NP(80122828)],
+  ["22 July 1970", 1970.56, null, ["board"], "event", "NAACP sues the board", "The Decatur NAACP sued in federal court in Springfield, saying the 1970 redistricting resegregated the district.", "Decatur Herald, 28 Apr 1972, p. 3", NP(94354710)],
+  ["27 April 1972", 1972.32, null, ["board"], "event", "Federal judge rules for the board", "Judge Omer Poos granted summary judgment for the board; the NAACP filed notice of appeal by 30 May.", "Decatur Herald, 28 Apr 1972, p. 3", NP(94354710), "The outcome of the appeal is not known."],
+  ["11 May 1976", 1976.36, null, ["board"], "event", "Desegregation plan adopted 4-2", "The board adopted Superintendent Oakes's plan to close Ullrich and regroup six schools so each would be 7% to 37% Black.", "Decatur Daily Review, 12 May 1976, p. 36", NP(77633398)],
+  ["25 May 1976", 1976.4, null, ["board"], "event", "State accepts Decatur's plan", "State Superintendent Joseph Cronin told Oakes the Illinois Office of Education had accepted the plan.", "Decatur Herald, 26 May 1976, p. 3", NP(77572912)],
+  ["24 March 1992", 1992.23, null, ["board", "money"], "event", "213 positions cut, $5 million borrowed", "The board trimmed 213 positions and borrowed $5 million to meet a budget crisis.", "Herald & Review, 25 Mar 1992", null],
+  ["17 September 1999", 1999.71, null, ["board"], "event", "Fight in the stands at Eisenhower-MacArthur game", "A brawl broke out in the stands at Eisenhower during the first night game in years between the crosstown rivals; night games had been moved earlier because of gang-related violence. The fight was videotaped.", "Education Week, Nov 1999 and Jan 2000", "https://www.edweek.org/leadership/after-jacksons-arrest-both-sides-in-decatur-file-suits/1999/11"],
+  ["27 to 29 September 1999", 1999.74, null, ["board"], "event", "Expulsion hearings", "Seven students from three high schools, all Black, had been suspended for 10 days; their principals recommended two-year expulsions, and hearings were held over three days.", "U.S. District Court opinion, Fuller v. Decatur", "https://www.courtlistener.com/opinion/8708162/fuller-v-decatur-public-school-board-of-education-school-district-61/"],
+  ["1 October 1999", 1999.75, null, ["board"], "event", "Board votes two-year expulsions", "At a special meeting the board reviewed the videotape and expelled the first students for two years, with no alternative schooling; all seven were ultimately expelled on the same terms.", "7th Circuit opinion, Fuller v. Decatur (2001); Education Week", "https://www.courtlistener.com/opinion/2995071/fuller-roosevelt-v-school-district-no/"],
+  ["8 November 1999", 1999.86, null, ["board"], "event", "Schools closed as Jackson leads protest; Governor Ryan intervenes", "The three public high schools closed to avoid a confrontation as the Rev. Jesse Jackson led a demonstration. After an eight-hour meeting with Rainbow/PUSH and Gov. George Ryan, the board met that night and cut the expulsions to the rest of the school year, with immediate alternative schooling. Jackson said the board had rebuffed the governor.", "NPR; 7th Circuit opinion; CBS News", "https://www.npr.org/1999/11/08/1066368/decatur-schools"],
+  ["14 November 1999", 1999.87, null, ["board"], "event", "Jackson returns for a protest march", "Jackson led another march in Decatur and demanded further reductions.", "Education Week, 24 Nov 1999", "https://www.edweek.org/leadership/after-jacksons-arrest-both-sides-in-decatur-file-suits/1999/11"],
+  ["16 November 1999", 1999.88, null, ["board"], "event", "Jackson arrested at Eisenhower; board holds firm", "Jackson and supporters stepped onto Eisenhower's grounds before television cameras; he and three others were jailed for several hours on preliminary charges including felony mob action. That night the board reaffirmed the one-year expulsions and said further challenges belonged in court.", "Education Week, 24 Nov 1999; CNN", "https://www.edweek.org/leadership/after-jacksons-arrest-both-sides-in-decatur-file-suits/1999/11"],
+  ["Mid-November 1999", 1999.885, null, ["board"], "event", "Dueling lawsuits; students enter alternative school", "Rainbow/PUSH sued to return the students to school and, separately, for $5 million per student over the release of their school records. The district went to court to bar Jackson and supporters from school grounds. Six students enrolled in county-run alternative programs on 18 November; the seventh moved out of state.", "Education Week, 24 Nov 1999", "https://www.edweek.org/leadership/after-jacksons-arrest-both-sides-in-decatur-file-suits/1999/11"],
+  ["11 January 2000", 2000.03, null, ["board"], "event", "Federal judge upholds the expulsions", "U.S. District Judge Michael McCuskey ruled the board was within its rights, finding no evidence the students were treated differently because of race. The case had become a national argument over zero-tolerance discipline.", "Education Week, Jan 2000; NPR", "https://www.edweek.org/leadership/u-s-judge-upholds-expulsions-in-decatur/2000/01"],
+  ["24 May 2001", 2001.39, null, ["board"], "event", "Appeals court affirms", "The 7th Circuit Court of Appeals upheld the district court's ruling for the school board in Fuller v. Decatur Public School Board.", "7th Circuit opinion, Fuller v. Decatur (2001)", "https://www.courtlistener.com/opinion/2995071/fuller-roosevelt-v-school-district-no/"],
+  ["December 2004", 2004.95, null, ["board"], "event", "Elementary boundaries redrawn", "The board redrew boundaries affecting 40% of elementary students and voted to close Southeast; focus groups had weighed neighborhood schools against racial balance.", "Herald & Review, 15 Dec 2004", U.bound],
+  ["February 2016", 2016.12, null, ["board"], "event", "Board votes 4-3 not to extend Superintendent Taylor", "Supporters in yellow attended a work session; an April editorial urged the board to regain public trust.", "Herald & Review, 16-17 Feb 2016; Illinois Public Media", U.coint],
+  ["March 2021", 2021.2, null, ["board"], "event", "Attorney General finds Open Meetings Act violations", "After a review requested by WAND, the Public Access Counselor found violations in multiple closed sessions; about 40 minutes of redacted audio was released.", "WAND", U.oma21, "The research file relied on a search summary."],
+  ["8 June 2021", 2021.44, null, ["board"], "event", "Interim superintendent named, 6-1", "Bobbi Williams appointed interim on a 120-work-day contract.", "WAND", U.williams],
+  ["26 July 2022", 2022.56, null, ["board"], "event", "Lincoln Park school plan dropped", "A $76 million Dennis campus in Lincoln Park, fast-tracked without a referendum because pandemic aid would pay, ended when the Park District declined to sell.", "WAND", U.lp2, "The research file relied on search summaries."],
+  ["30 September 2022", 2022.75, null, ["board"], "event", "Second Open Meetings Act finding (opinion 22-012)", "The board exceeded the real-estate exception in closed sessions from October 2021 to June 2022 while discussing a new school.", "IASB summary", U.oma22],
+  ["4 November 2022", 2022.84, null, ["board"], "event", "Audio of 16 closed sessions released", "The district released the recordings under the Attorney General's order.", "WAND", U.audio],
+  ["27 January 2026", 2026.07, null, ["board", "good"], "event", "Demographer presents in open session", "The board heard its demographer's study: the most negative outlook of about 300 districts his firm has studied. It also approved a tolling agreement with BLDD Architects and O'Shea Builders.", "Decatur Dispatch; IPM News", U.dispatch],
+  ["24 February 2026", 2026.15, null, ["board", "good"], "event", "Dr. Nicole Nash Moody hired, unanimous", "The board unanimously hired the new superintendent from Springfield District 186.", "IPM News", U.moody],
+  ["26 May 2026", 2026.4, null, ["board", "good"], "event", "Teacher contract ratified through 2029", "The board and the Decatur Education Association ratified a contract running through 2029.", "NowDecatur", U.contract, "The research file relied on a search summary."],
+  ["22 September 2026", 2026.72, null, ["board", "money"], "event", "FY2027 budget adopted 6-1 with a deficit", "Operating revenue $133.0 million against $139.3 million spending: a $6.25 million deficit against $43.5 million in reserves.", "WAND; 22 Sep 2026 board packet", U.budget],
+  ["10 November 2026", 2026.86, null, ["board"], "event", "Roadmap 2030 forums set", "The board heard the 2026 report card; the Roadmap 2030 committee is refining a grade-band plan, with public forums set for 7 December.", "WAND", U.rc26],
+
+  // Founding, early growth and later milestones
+  ["15 February 1855", 1855.12, null, ["mile"], "event", "Decatur's first school district formed", "Illinois's general school law provided state taxes for schools and required six months of school a year; Decatur's first school district was formed under it.", "Centennial History of Decatur (1930), via Wikipedia", "https://en.wikipedia.org/wiki/Decatur_Public_Schools_District_61"],
+  ["1857", 1857.5, null, ["build", "mile"], "open", "The \"Big Brick\" opens", "The first building used only for school, at the northwest corner of Church and North streets. It remained the city's most important school until the end of the century.", "Centennial History of Decatur (1930), via Wikipedia", "https://en.wikipedia.org/wiki/Decatur_Public_Schools_District_61"],
+  ["22 September 1862", 1862.72, null, ["mile"], "event", "High school classes begin", "High school was first held in the east room of the Big Brick, later in the basement of the Baptist church.", "Centennial History of Decatur (1930), via Wikipedia", "https://en.wikipedia.org/wiki/Decatur_Public_Schools_District_61"],
+  ["16 February 1865", 1865.13, null, ["mile"], "event", "Special charter creates the modern district", "The General Assembly granted Decatur a special charter with a three-member school board holding broad authority over programs, money and buildings.", "Centennial History; Garfield School National Register nomination", "https://en.wikipedia.org/wiki/Decatur_Public_Schools_District_61"],
+  ["20 June 1867", 1867.47, null, ["mile", "good"], "event", "First high school commencement", "Four girls graduated at Powers Hall.", "Centennial History of Decatur (1930), via Wikipedia", "https://en.wikipedia.org/wiki/Decatur_Public_Schools_District_61"],
+  ["September 1869", 1869.7, null, ["build", "mile"], "open", "First purpose-built high school opens", "At North and Broadway streets. By 1870, five new buildings including the high school had been completed under Superintendent Gastman.", "Centennial History of Decatur (1930), via Wikipedia", "https://en.wikipedia.org/wiki/Decatur_Public_Schools_District_61"],
+  ["1883 and 1889", 1886.0, null, ["mile"], "event", "Compulsory attendance comes to Illinois", "State laws in 1883 and 1889 required children as young as seven to attend school; nearly a dozen new Decatur school buildings went up by 1900.", "Garfield School National Register nomination", U.garf],
+  ["1903", 1903.5, null, ["build"], "open", "Gastman School replaces the Big Brick", "At North and Church streets; designed by Barkley S. Brooks.", "Garfield School National Register nomination", U.garf],
+  ["1907 to 1910", 1907.5, null, ["build"], "open", "Riverside (1907), Roach (1908), Oglesby and Dennis (1910) built", "Designed by Barkley S. Brooks.", "Garfield School National Register nomination", U.garf],
+  ["1911", 1911.6, null, ["build", "mile"], "open", "New Decatur High School at North and Jackson", "Designed by Brooks; served as the city's only public high school until 1957.", "Garfield School National Register nomination", U.garf],
+  ["June 1914", 1914.44, null, ["good"], "event", "A kindergarten at Roach School", "The board let the First Presbyterian Young Women's Guild run a non-sectarian kindergarten in Roach School.", "Herald and Review, 10 Jun 1914, p. 3", NP(87658961), "This was a church guild's kindergarten in a public building; when the district began its own kindergartens is not yet confirmed."],
+  ["1914 to 1917", 1915.5, null, ["build"], "open", "French, Ullrich (1914), Durfee (1915), Lincoln (1917) built", "Designed by Brooks, Bramhall & Dague, the board's architects through the early 1930s.", "Garfield School National Register nomination", U.garf],
+  ["1922 to 1931", 1926.5, null, ["build", "mile"], "open", "Junior highs and a $1.25 million building program", "Roosevelt Junior High (1922), Washington, Garfield and Grant (1925), Johns Hill and Centennial Junior Highs (1929) and Woodrow Wilson Junior High (1931). A $1.25 million citywide improvement program was planned in 1925; the Depression then halted expansion.", "Garfield School National Register nomination", U.garf],
+  ["17 November 1953", 1953.88, null, ["money", "good", "mile"], "event", "Voters approve a $7 million school bond issue", "A record 11,694 ballots approved the school building program by about 3 to 1, and as high as 15 to 1 in some precincts.", "Decatur Daily Review, 18 Nov 1953, p. 1", NP(88442943)],
+  ["Fall 1957", 1957.7, null, ["build", "mile"], "open", "Eisenhower and MacArthur open; four high schools", "Eisenhower and MacArthur opened and Lakeview, formerly an independent district, joined; Decatur High became Stephen Decatur High School.", "Illinois High School Glory Days; Wikipedia", "https://illinoishighschoolglorydays.com/2022/03/02/decatur-high-school-reds/"],
+  ["1969", 1969.5, null, ["good", "mile"], "event", "District 61 becomes the agent for Macon-Piatt Special Education", "District 61 served as administrative agent for the Macon-Piatt Special Education District, covering payroll and insurance, for about 50 years until the cooperative agreement ended 1 July 2021.", "WAND", "https://www.wandtv.com/news/dps-61-will-no-longer-represent-300-special-education-teachers/article_6713ad5a-102b-11eb-bd66-9fd65eb42216.html", "The October 2020 story says the agreement ends 1 July; the year 2021 is inferred from the story date."],
+  ["February 1980", 1980.13, null, ["good", "mile"], "event", "Microcomputers in Decatur classrooms", "The district had bought several microcomputers and was using them at the elementary, middle and high school levels.", "Herald and Review, 20 Feb 1980, p. 3", NP(77613685)],
+  ["1997", 1997.5, null, ["good", "mile"], "event", "Decatur Public Schools Foundation established", "A privately funded foundation for teacher grants and student projects. It has awarded about $5.3 million in grants to the district since 2016.", "Foundation records (IRS ruling 1997)", "https://intellispect.co/organizations/364161308-decatur-public-schools-foundation"],
+  ["2012 to 2014", 2012.5, null, ["good", "money"], "event", "$5.4 million School Improvement Grant", "The state awarded District 61 a three-year federal School Improvement Grant of $5,399,998, including $4,218,727 for Eisenhower High School's transformation.", "Illinois State Board of Education, FY2012 SIG awards", "https://www.isbe.net/Documents/sig_1003g_funded_fy12.pdf"],
+  ["2013", 2013.05, null, ["build", "good"], "open", "Rebuilt Eisenhower reopens, LEED Gold", "The 240,666-square-foot renovation of the 50-year-old school earned LEED Gold certification.", "Builder project profile", "https://www.builderonline.com/?p=129132"],
+  ["January 2023", 2023.03, null, ["good"], "event", "Prep Academy with Richland Community College", "Selected students earn a high school diploma and a Richland associate degree at once; a $150,000 donor-advised grant supported the program.", "NowDecatur", "https://nowdecatur.com/?p=86063"],
+  ["May 2025", 2025.36, null, ["good"], "event", "First Prep Academy class graduates", "The first cohort of 25 students graduated with associate degrees; a second $150,000 grant marked the occasion.", "NowDecatur", "https://nowdecatur.com/?p=216847"],
+
+  // IHSA postseason: one entry per school, sport and season (best level reached)
+  ["9 March 2026", 2026.19, null, ["sports"], "event", "MacArthur boys basketball one shot from state", "The 34-2 Generals won regional and sectional titles and lost the Class 3A super-sectional to East St. Louis 51-49 when a last-second shot rimmed out.", "WAND; IHSA", "https://www.wandtv.com/sports/local-sports-news-video/macarthur-comes-up-inches-away-of-trip-to-state-falling-in-3a-super-sectionals/article_3b1a2477-6acd-4b39-8047-a2a7b5b5fe69.html"],
+  ["2000", 2000.45, null, ["sports"], "event", "MacArthur Boys Soccer: fourth in state", "MacArthur finished 4th in the IHSA Class A state boys soccer tournament, 1999-00 season.", "IHSA, 1999-00 season", "https://www.ihsa.org/data/titles/d.htm"],
+  ["October 1977", 1977.8, null, ["sports"], "event", "MacArthur Girls Golf: second in state", "MacArthur finished 2nd in the IHSA state girls golf competition, 1977-78 season.", "IHSA, 1977-78 season", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May-June 1965", 1965.4, null, ["sports"], "lv-state", "MacArthur Baseball: State finals", "MacArthur baseball reached the state finals, won a sectional title, won a regional title, 1964-65 season.", "IHSA team titles, 1964-65", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May-June 1975", 1975.4, null, ["sports"], "lv-state", "MacArthur Baseball: State finals", "MacArthur baseball reached the state finals, won a sectional title, won a regional title, 1974-75 season.", "IHSA team titles, 1974-75", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May-June 1993", 1993.4, null, ["sports"], "lv-state", "MacArthur Baseball: State finals", "MacArthur baseball reached the state finals, won a sectional title, won a regional title, 1992-93 season (Class AA).", "IHSA team titles, 1992-93", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May-June 1964", 1964.4, null, ["sports"], "lv-reg", "MacArthur Baseball: Regional", "MacArthur baseball won a regional title, 1963-64 season.", "IHSA team titles, 1963-64", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May-June 1969", 1969.4, null, ["sports"], "lv-reg", "MacArthur Baseball: Regional", "MacArthur baseball won a regional title, 1968-69 season.", "IHSA team titles, 1968-69", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May-June 1976", 1976.4, null, ["sports"], "lv-reg", "MacArthur Baseball: Regional", "MacArthur baseball won a regional title, 1975-76 season.", "IHSA team titles, 1975-76", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May-June 1978", 1978.4, null, ["sports"], "lv-reg", "MacArthur Baseball: Regional", "MacArthur baseball won a regional title, 1977-78 season (Class AA).", "IHSA team titles, 1977-78", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May-June 1982", 1982.4, null, ["sports"], "lv-reg", "MacArthur Baseball: Regional", "MacArthur baseball won a regional title, 1981-82 season (Class AA).", "IHSA team titles, 1981-82", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 1959", 1959.17, null, ["sports"], "lv-reg", "MacArthur Boys Basketball: Regional", "MacArthur boys basketball won a regional title, 1958-59 season.", "IHSA team titles, 1958-59", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 1977", 1977.17, null, ["sports"], "lv-reg", "MacArthur Boys Basketball: Regional", "MacArthur boys basketball won a regional title, 1976-77 season (Class AA).", "IHSA team titles, 1976-77", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 1982", 1982.17, null, ["sports"], "lv-reg", "MacArthur Boys Basketball: Regional", "MacArthur boys basketball won a regional title, 1981-82 season (Class AA).", "IHSA team titles, 1981-82", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 1985", 1985.17, null, ["sports"], "lv-reg", "MacArthur Boys Basketball: Regional", "MacArthur boys basketball won a regional title, 1984-85 season (Class AA).", "IHSA team titles, 1984-85", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 1989", 1989.17, null, ["sports"], "lv-reg", "MacArthur Boys Basketball: Regional", "MacArthur boys basketball won a regional title, 1988-89 season (Class AA).", "IHSA team titles, 1988-89", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 1990", 1990.17, null, ["sports"], "lv-reg", "MacArthur Boys Basketball: Regional", "MacArthur boys basketball won a regional title, 1989-90 season (Class AA).", "IHSA team titles, 1989-90", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 1995", 1995.17, null, ["sports"], "lv-reg", "MacArthur Boys Basketball: Regional", "MacArthur boys basketball won a regional title, 1994-95 season (Class AA).", "IHSA team titles, 1994-95", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 1996", 1996.17, null, ["sports"], "lv-reg", "MacArthur Boys Basketball: Regional", "MacArthur boys basketball won a regional title, 1995-96 season (Class AA).", "IHSA team titles, 1995-96", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 2003", 2003.17, null, ["sports"], "lv-reg", "MacArthur Boys Basketball: Regional", "MacArthur boys basketball won a regional title, 2002-03 season (Class AA).", "IHSA team titles, 2002-03", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 2009", 2009.17, null, ["sports"], "lv-reg", "MacArthur Boys Basketball: Regional", "MacArthur boys basketball won a regional title, 2008-09 season (Class 3A).", "IHSA team titles, 2008-09", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 2012", 2012.17, null, ["sports"], "lv-reg", "MacArthur Boys Basketball: Regional", "MacArthur boys basketball won a regional title, 2011-12 season (Class 3A).", "IHSA team titles, 2011-12", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 2015", 2015.17, null, ["sports"], "lv-reg", "MacArthur Boys Basketball: Regional", "MacArthur boys basketball won a regional title, 2014-15 season (Class 3A).", "IHSA team titles, 2014-15", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 2020", 2020.17, null, ["sports"], "lv-reg", "MacArthur Boys Basketball: Regional", "MacArthur boys basketball won a regional title, 2019-20 season (Class 3A).", "IHSA team titles, 2019-20", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 2022", 2022.17, null, ["sports"], "lv-reg", "MacArthur Boys Basketball: Regional", "MacArthur boys basketball won a regional title, 2021-22 season (Class 3A).", "IHSA team titles, 2021-22", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 2023", 2023.17, null, ["sports"], "lv-reg", "MacArthur Boys Basketball: Regional", "MacArthur boys basketball won a regional title, 2022-23 season (Class 3A).", "IHSA team titles, 2022-23", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 2024", 2024.17, null, ["sports"], "lv-reg", "MacArthur Boys Basketball: Regional", "MacArthur boys basketball won a regional title, 2023-24 season (Class 3A).", "IHSA team titles, 2023-24", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 2026", 2026.17, null, ["sports"], "lv-sect", "MacArthur Boys Basketball: Sectional", "MacArthur boys basketball won a sectional title, won a regional title, 2025-26 season (Class 3A).", "IHSA team titles, 2025-26", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1967", 1967.85, null, ["sports"], "lv-dist", "MacArthur Boys Cross Country: District", "MacArthur boys cross country won a district title, qualified as a team for state, 1967-68 season.", "IHSA team titles, 1967-68", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1968", 1968.85, null, ["sports"], "lv-dist", "MacArthur Boys Cross Country: District", "MacArthur boys cross country won a district title, qualified as a team for state, 1968-69 season.", "IHSA team titles, 1968-69", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1977", 1977.85, null, ["sports"], "lv-dist", "MacArthur Boys Cross Country: State qualifier", "MacArthur boys cross country qualified as a team for state, 1977-78 season (Class AA).", "IHSA team titles, 1977-78", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1978", 1978.85, null, ["sports"], "lv-dist", "MacArthur Boys Cross Country: State qualifier", "MacArthur boys cross country qualified as a team for state, 1978-79 season (Class AA).", "IHSA team titles, 1978-79", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1989", 1989.85, null, ["sports"], "lv-dist", "MacArthur Boys Cross Country: State qualifier", "MacArthur boys cross country qualified as a team for state, 1989-90 season (Class AA).", "IHSA team titles, 1989-90", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1990", 1990.85, null, ["sports"], "lv-reg", "MacArthur Boys Cross Country: Regional", "MacArthur boys cross country won a regional title, qualified as a team for state, 1990-91 season (Class AA).", "IHSA team titles, 1990-91", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1991", 1991.85, null, ["sports"], "lv-dist", "MacArthur Boys Cross Country: State qualifier", "MacArthur boys cross country qualified as a team for state, 1991-92 season (Class AA).", "IHSA team titles, 1991-92", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1992", 1992.85, null, ["sports"], "lv-sect", "MacArthur Boys Cross Country: Sectional", "MacArthur boys cross country won a sectional title, won a regional title, qualified as a team for state, 1992-93 season (Class AA).", "IHSA team titles, 1992-93", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1993", 1993.85, null, ["sports"], "lv-sect", "MacArthur Boys Cross Country: Sectional", "MacArthur boys cross country won a sectional title, won a regional title, qualified as a team for state, 1993-94 season (Class AA).", "IHSA team titles, 1993-94", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1994", 1994.85, null, ["sports"], "lv-reg", "MacArthur Boys Cross Country: Regional", "MacArthur boys cross country won a regional title, qualified as a team for state, 1994-95 season (Class AA).", "IHSA team titles, 1994-95", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1996", 1996.85, null, ["sports"], "lv-reg", "MacArthur Boys Cross Country: Regional", "MacArthur boys cross country won a regional title, qualified as a team for state, 1996-97 season (Class AA).", "IHSA team titles, 1996-97", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1997", 1997.85, null, ["sports"], "lv-reg", "MacArthur Boys Cross Country: Regional", "MacArthur boys cross country won a regional title, qualified as a team for state, 1997-98 season (Class AA).", "IHSA team titles, 1997-98", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1998", 1998.85, null, ["sports"], "lv-reg", "MacArthur Boys Cross Country: Regional", "MacArthur boys cross country won a regional title, qualified as a team for state, 1998-99 season (Class AA).", "IHSA team titles, 1998-99", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 2000", 2000.85, null, ["sports"], "lv-reg", "MacArthur Boys Cross Country: Regional", "MacArthur boys cross country won a regional title, qualified as a team for state, 2000-01 season (Class AA).", "IHSA team titles, 2000-01", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 2001", 2001.85, null, ["sports"], "lv-reg", "MacArthur Boys Cross Country: Regional", "MacArthur boys cross country won a regional title, qualified as a team for state, 2001-02 season (Class AA).", "IHSA team titles, 2001-02", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1969", 1969.85, null, ["sports"], "lv-dist", "MacArthur Boys Cross Country: District", "MacArthur boys cross country won a district title, 1969-70 season.", "IHSA team titles, 1969-70", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1979", 1979.85, null, ["sports"], "lv-dist", "MacArthur Boys Cross Country: District", "MacArthur boys cross country won a district title, 1979-80 season (Class AA).", "IHSA team titles, 1979-80", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1995", 1995.85, null, ["sports"], "lv-reg", "MacArthur Boys Cross Country: Regional", "MacArthur boys cross country won a regional title, 1995-96 season (Class AA).", "IHSA team titles, 1995-96", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 2002", 2002.85, null, ["sports"], "lv-reg", "MacArthur Boys Cross Country: Regional", "MacArthur boys cross country won a regional title, 2002-03 season (Class AA).", "IHSA team titles, 2002-03", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1958", 1958.85, null, ["sports"], "lv-dist", "MacArthur Boys Golf: State qualifier", "MacArthur boys golf qualified as a team for state, 1958-59 season.", "IHSA team titles, 1958-59", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1959", 1959.85, null, ["sports"], "lv-dist", "MacArthur Boys Golf: District", "MacArthur boys golf won a district title, qualified as a team for state, 1959-60 season.", "IHSA team titles, 1959-60", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1966", 1966.85, null, ["sports"], "lv-dist", "MacArthur Boys Golf: District", "MacArthur boys golf won a district title, qualified as a team for state, 1966-67 season.", "IHSA team titles, 1966-67", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1967", 1967.85, null, ["sports"], "lv-dist", "MacArthur Boys Golf: District", "MacArthur boys golf won a district title, qualified as a team for state, 1967-68 season.", "IHSA team titles, 1967-68", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1968", 1968.85, null, ["sports"], "lv-dist", "MacArthur Boys Golf: District", "MacArthur boys golf won a district title, qualified as a team for state, 1968-69 season.", "IHSA team titles, 1968-69", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1969", 1969.85, null, ["sports"], "lv-dist", "MacArthur Boys Golf: District", "MacArthur boys golf won a district title, qualified as a team for state, 1969-70 season.", "IHSA team titles, 1969-70", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1972", 1972.85, null, ["sports"], "lv-sect", "MacArthur Boys Golf: Sectional", "MacArthur boys golf won a sectional title, qualified as a team for state, 1972-73 season.", "IHSA team titles, 1972-73", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1974", 1974.85, null, ["sports"], "lv-dist", "MacArthur Boys Golf: District", "MacArthur boys golf won a district title, qualified as a team for state, 1974-75 season.", "IHSA team titles, 1974-75", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1975", 1975.85, null, ["sports"], "lv-dist", "MacArthur Boys Golf: State qualifier", "MacArthur boys golf qualified as a team for state, 1975-76 season (Class AA).", "IHSA team titles, 1975-76", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1976", 1976.85, null, ["sports"], "lv-dist", "MacArthur Boys Golf: District", "MacArthur boys golf won a district title, qualified as a team for state, 1976-77 season (Class AA).", "IHSA team titles, 1976-77", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1991", 1991.85, null, ["sports"], "lv-sect", "MacArthur Boys Golf: Sectional", "MacArthur boys golf won a sectional title, qualified as a team for state, 1991-92 season (Class AA).", "IHSA team titles, 1991-92", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1973", 1973.85, null, ["sports"], "lv-dist", "MacArthur Boys Golf: District", "MacArthur boys golf won a district title, 1973-74 season.", "IHSA team titles, 1973-74", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1980", 1980.85, null, ["sports"], "lv-dist", "MacArthur Boys Golf: District", "MacArthur boys golf won a district title, 1980-81 season (Class AA).", "IHSA team titles, 1980-81", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1999", 1999.85, null, ["sports"], "lv-state", "MacArthur Boys Soccer: State finals", "MacArthur boys soccer reached the state finals, won a super-sectional, won a sectional title, 1999-00 season (Class A).", "IHSA team titles, 1999-00", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1988", 1988.85, null, ["sports"], "lv-reg", "MacArthur Boys Soccer: Regional", "MacArthur boys soccer won a regional title, 1988-89 season.", "IHSA team titles, 1988-89", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1989", 1989.85, null, ["sports"], "lv-reg", "MacArthur Boys Soccer: Regional", "MacArthur boys soccer won a regional title, 1989-90 season.", "IHSA team titles, 1989-90", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 2008", 2008.85, null, ["sports"], "lv-reg", "MacArthur Boys Soccer: Regional", "MacArthur boys soccer won a regional title, 2008-09 season (Class 2A).", "IHSA team titles, 2008-09", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1998", 1998.85, null, ["sports"], "lv-sect", "MacArthur Boys Soccer: Sectional", "MacArthur boys soccer won a sectional title, 1998-99 season (Class A).", "IHSA team titles, 1998-99", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 1958", 1958.37, null, ["sports"], "lv-dist", "MacArthur Boys Tennis: District", "MacArthur boys tennis won a district title, 1957-58 season.", "IHSA team titles, 1957-58", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 1959", 1959.37, null, ["sports"], "lv-dist", "MacArthur Boys Tennis: District", "MacArthur boys tennis won a district title, 1958-59 season.", "IHSA team titles, 1958-59", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 1960", 1960.37, null, ["sports"], "lv-dist", "MacArthur Boys Tennis: District", "MacArthur boys tennis won a district title, 1959-60 season.", "IHSA team titles, 1959-60", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 1962", 1962.37, null, ["sports"], "lv-dist", "MacArthur Boys Tennis: District", "MacArthur boys tennis won a district title, 1961-62 season.", "IHSA team titles, 1961-62", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 1964", 1964.37, null, ["sports"], "lv-dist", "MacArthur Boys Tennis: District", "MacArthur boys tennis won a district title, 1963-64 season.", "IHSA team titles, 1963-64", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 1965", 1965.37, null, ["sports"], "lv-dist", "MacArthur Boys Tennis: District", "MacArthur boys tennis won a district title, 1964-65 season.", "IHSA team titles, 1964-65", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 1966", 1966.37, null, ["sports"], "lv-dist", "MacArthur Boys Tennis: District", "MacArthur boys tennis won a district title, 1965-66 season.", "IHSA team titles, 1965-66", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 1967", 1967.37, null, ["sports"], "lv-dist", "MacArthur Boys Tennis: District", "MacArthur boys tennis won a district title, 1966-67 season.", "IHSA team titles, 1966-67", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 1970", 1970.37, null, ["sports"], "lv-dist", "MacArthur Boys Tennis: District", "MacArthur boys tennis won a district title, 1969-70 season.", "IHSA team titles, 1969-70", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 1971", 1971.37, null, ["sports"], "lv-dist", "MacArthur Boys Tennis: District", "MacArthur boys tennis won a district title, 1970-71 season.", "IHSA team titles, 1970-71", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 1972", 1972.37, null, ["sports"], "lv-dist", "MacArthur Boys Tennis: District", "MacArthur boys tennis won a district title, 1971-72 season.", "IHSA team titles, 1971-72", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 1973", 1973.37, null, ["sports"], "lv-dist", "MacArthur Boys Tennis: District", "MacArthur boys tennis won a district title, 1972-73 season.", "IHSA team titles, 1972-73", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 1974", 1974.37, null, ["sports"], "lv-dist", "MacArthur Boys Tennis: District", "MacArthur boys tennis won a district title, 1973-74 season.", "IHSA team titles, 1973-74", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 1975", 1975.37, null, ["sports"], "lv-dist", "MacArthur Boys Tennis: District", "MacArthur boys tennis won a district title, 1974-75 season.", "IHSA team titles, 1974-75", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 1976", 1976.37, null, ["sports"], "lv-dist", "MacArthur Boys Tennis: District", "MacArthur boys tennis won a district title, 1975-76 season.", "IHSA team titles, 1975-76", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 1978", 1978.37, null, ["sports"], "lv-dist", "MacArthur Boys Tennis: District", "MacArthur boys tennis won a district title, 1977-78 season.", "IHSA team titles, 1977-78", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 1979", 1979.37, null, ["sports"], "lv-dist", "MacArthur Boys Tennis: District", "MacArthur boys tennis won a district title, 1978-79 season.", "IHSA team titles, 1978-79", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 1980", 1980.37, null, ["sports"], "lv-dist", "MacArthur Boys Tennis: District", "MacArthur boys tennis won a district title, 1979-80 season.", "IHSA team titles, 1979-80", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 1986", 1986.37, null, ["sports"], "lv-sect", "MacArthur Boys Tennis: Sectional", "MacArthur boys tennis won a sectional title, 1985-86 season.", "IHSA team titles, 1985-86", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 1987", 1987.37, null, ["sports"], "lv-sect", "MacArthur Boys Tennis: Sectional", "MacArthur boys tennis won a sectional title, 1986-87 season.", "IHSA team titles, 1986-87", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 2004", 2004.37, null, ["sports"], "lv-sect", "MacArthur Boys Tennis: Sectional", "MacArthur boys tennis won a sectional title, 2003-04 season.", "IHSA team titles, 2003-04", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 2005", 2005.37, null, ["sports"], "lv-sect", "MacArthur Boys Tennis: Sectional", "MacArthur boys tennis won a sectional title, 2004-05 season.", "IHSA team titles, 2004-05", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 2006", 2006.37, null, ["sports"], "lv-sect", "MacArthur Boys Tennis: Sectional", "MacArthur boys tennis won a sectional title, 2005-06 season.", "IHSA team titles, 2005-06", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 1962", 1962.37, null, ["sports"], "lv-dist", "MacArthur Boys Track & Field: District", "MacArthur boys track & field won a district title, 1961-62 season.", "IHSA team titles, 1961-62", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 1963", 1963.37, null, ["sports"], "lv-dist", "MacArthur Boys Track & Field: District", "MacArthur boys track & field won a district title, 1962-63 season.", "IHSA team titles, 1962-63", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 1964", 1964.37, null, ["sports"], "lv-dist", "MacArthur Boys Track & Field: District", "MacArthur boys track & field won a district title, 1963-64 season.", "IHSA team titles, 1963-64", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 1965", 1965.37, null, ["sports"], "lv-dist", "MacArthur Boys Track & Field: District", "MacArthur boys track & field won a district title, 1964-65 season.", "IHSA team titles, 1964-65", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 1969", 1969.37, null, ["sports"], "lv-dist", "MacArthur Boys Track & Field: District", "MacArthur boys track & field won a district title, 1968-69 season.", "IHSA team titles, 1968-69", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 1970", 1970.37, null, ["sports"], "lv-dist", "MacArthur Boys Track & Field: District", "MacArthur boys track & field won a district title, 1969-70 season.", "IHSA team titles, 1969-70", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 1971", 1971.37, null, ["sports"], "lv-dist", "MacArthur Boys Track & Field: District", "MacArthur boys track & field won a district title, 1970-71 season.", "IHSA team titles, 1970-71", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 1973", 1973.37, null, ["sports"], "lv-dist", "MacArthur Boys Track & Field: District", "MacArthur boys track & field won a district title, 1972-73 season.", "IHSA team titles, 1972-73", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 1986", 1986.37, null, ["sports"], "lv-sect", "MacArthur Boys Track & Field: Sectional", "MacArthur boys track & field won a sectional title, 1985-86 season (Class AA).", "IHSA team titles, 1985-86", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 1988", 1988.37, null, ["sports"], "lv-sect", "MacArthur Boys Track & Field: Sectional", "MacArthur boys track & field won a sectional title, 1987-88 season (Class AA).", "IHSA team titles, 1987-88", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 1989", 1989.37, null, ["sports"], "lv-sect", "MacArthur Boys Track & Field: Sectional", "MacArthur boys track & field won a sectional title, 1988-89 season (Class AA).", "IHSA team titles, 1988-89", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 1990", 1990.37, null, ["sports"], "lv-sect", "MacArthur Boys Track & Field: Sectional", "MacArthur boys track & field won a sectional title, 1989-90 season (Class AA).", "IHSA team titles, 1989-90", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 1991", 1991.37, null, ["sports"], "lv-sect", "MacArthur Boys Track & Field: Sectional", "MacArthur boys track & field won a sectional title, 1990-91 season (Class AA).", "IHSA team titles, 1990-91", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 1992", 1992.37, null, ["sports"], "lv-sect", "MacArthur Boys Track & Field: Sectional", "MacArthur boys track & field won a sectional title, 1991-92 season (Class AA).", "IHSA team titles, 1991-92", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 1994", 1994.37, null, ["sports"], "lv-sect", "MacArthur Boys Track & Field: Sectional", "MacArthur boys track & field won a sectional title, 1993-94 season (Class AA).", "IHSA team titles, 1993-94", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 2001", 2001.37, null, ["sports"], "lv-sect", "MacArthur Boys Track & Field: Sectional", "MacArthur boys track & field won a sectional title, 2000-01 season (Class AA).", "IHSA team titles, 2000-01", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 2002", 2002.37, null, ["sports"], "lv-sect", "MacArthur Boys Track & Field: Sectional", "MacArthur boys track & field won a sectional title, 2001-02 season (Class AA).", "IHSA team titles, 2001-02", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 2003", 2003.37, null, ["sports"], "lv-sect", "MacArthur Boys Track & Field: Sectional", "MacArthur boys track & field won a sectional title, 2002-03 season (Class AA).", "IHSA team titles, 2002-03", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February 1963", 1963.1, null, ["sports"], "lv-dist", "MacArthur Boys Wrestling: District", "MacArthur boys wrestling won a district title, 1962-63 season.", "IHSA team titles, 1962-63", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February 1964", 1964.1, null, ["sports"], "lv-dist", "MacArthur Boys Wrestling: District", "MacArthur boys wrestling won a district title, 1963-64 season.", "IHSA team titles, 1963-64", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February 1965", 1965.1, null, ["sports"], "lv-dist", "MacArthur Boys Wrestling: District", "MacArthur boys wrestling won a district title, 1964-65 season.", "IHSA team titles, 1964-65", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February 1966", 1966.1, null, ["sports"], "lv-dist", "MacArthur Boys Wrestling: District", "MacArthur boys wrestling won a district title, 1965-66 season.", "IHSA team titles, 1965-66", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February 1970", 1970.1, null, ["sports"], "lv-dist", "MacArthur Boys Wrestling: District", "MacArthur boys wrestling won a district title, 1969-70 season.", "IHSA team titles, 1969-70", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February 1971", 1971.1, null, ["sports"], "lv-dist", "MacArthur Boys Wrestling: District", "MacArthur boys wrestling won a district title, 1970-71 season.", "IHSA team titles, 1970-71", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February 1972", 1972.1, null, ["sports"], "lv-dist", "MacArthur Boys Wrestling: District", "MacArthur boys wrestling won a district title, 1971-72 season.", "IHSA team titles, 1971-72", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Winter 1976", 1976.15, null, ["sports"], "lv-dist", "MacArthur Drama: District", "MacArthur drama won a district title, qualified as a team for state, 1975-76 season.", "IHSA team titles, 1975-76", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Winter 1985", 1985.15, null, ["sports"], "lv-dist", "MacArthur Drama: State qualifier", "MacArthur drama qualified as a team for state, 1984-85 season.", "IHSA team titles, 1984-85", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Winter 1987", 1987.15, null, ["sports"], "lv-dist", "MacArthur Drama: State qualifier", "MacArthur drama qualified as a team for state, 1986-87 season.", "IHSA team titles, 1986-87", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Winter 1989", 1989.15, null, ["sports"], "lv-sect", "MacArthur Drama: Sectional", "MacArthur drama won a sectional title, qualified as a team for state, 1988-89 season.", "IHSA team titles, 1988-89", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1985", 1985.85, null, ["sports"], "lv-dist", "MacArthur Football: State playoffs", "MacArthur football made the state playoffs, 1985-86 season (Class 5A).", "IHSA team titles, 1985-86", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1987", 1987.85, null, ["sports"], "lv-dist", "MacArthur Football: State playoffs", "MacArthur football made the state playoffs, 1987-88 season (Class 5A).", "IHSA team titles, 1987-88", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1989", 1989.85, null, ["sports"], "lv-dist", "MacArthur Football: State playoffs", "MacArthur football made the state playoffs, 1989-90 season (Class 5A).", "IHSA team titles, 1989-90", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1993", 1993.85, null, ["sports"], "lv-dist", "MacArthur Football: State playoffs", "MacArthur football made the state playoffs, 1993-94 season (Class 4A).", "IHSA team titles, 1993-94", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1994", 1994.85, null, ["sports"], "lv-dist", "MacArthur Football: State playoffs", "MacArthur football made the state playoffs, 1994-95 season (Class 4A).", "IHSA team titles, 1994-95", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 2001", 2001.85, null, ["sports"], "lv-dist", "MacArthur Football: State playoffs", "MacArthur football made the state playoffs, 2001-02 season (Class 6A).", "IHSA team titles, 2001-02", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 2008", 2008.85, null, ["sports"], "lv-dist", "MacArthur Football: State playoffs", "MacArthur football made the state playoffs, 2008-09 season (Class 5A).", "IHSA team titles, 2008-09", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 2009", 2009.85, null, ["sports"], "lv-dist", "MacArthur Football: State playoffs", "MacArthur football made the state playoffs, 2009-10 season (Class 5A).", "IHSA team titles, 2009-10", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 2011", 2011.85, null, ["sports"], "lv-dist", "MacArthur Football: State playoffs", "MacArthur football made the state playoffs, 2011-12 season (Class 5A).", "IHSA team titles, 2011-12", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 2013", 2013.85, null, ["sports"], "lv-dist", "MacArthur Football: State playoffs", "MacArthur football made the state playoffs, 2013-14 season (Class 5A).", "IHSA team titles, 2013-14", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 2014", 2014.85, null, ["sports"], "lv-dist", "MacArthur Football: State playoffs", "MacArthur football made the state playoffs, 2014-15 season (Class 5A).", "IHSA team titles, 2014-15", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 2017", 2017.85, null, ["sports"], "lv-dist", "MacArthur Football: State playoffs", "MacArthur football made the state playoffs, 2017-18 season (Class 5A).", "IHSA team titles, 2017-18", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 2018", 2018.85, null, ["sports"], "lv-dist", "MacArthur Football: State playoffs", "MacArthur football made the state playoffs, 2018-19 season (Class 5A).", "IHSA team titles, 2018-19", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 2019", 2019.85, null, ["sports"], "lv-dist", "MacArthur Football: State playoffs", "MacArthur football made the state playoffs, 2019-20 season (Class 5A).", "IHSA team titles, 2019-20", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 2022", 2022.85, null, ["sports"], "lv-dist", "MacArthur Football: State playoffs", "MacArthur football made the state playoffs, 2022-23 season (Class 5A).", "IHSA team titles, 2022-23", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 2023", 2023.85, null, ["sports"], "lv-dist", "MacArthur Football: State playoffs", "MacArthur football made the state playoffs, 2023-24 season (Class 5A).", "IHSA team titles, 2023-24", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 2025", 2025.85, null, ["sports"], "lv-dist", "MacArthur Football: State playoffs", "MacArthur football made the state playoffs, 2025-26 season (Class 5A).", "IHSA team titles, 2025-26", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 1978", 1978.17, null, ["sports"], "lv-reg", "MacArthur Girls Basketball: Regional", "MacArthur girls basketball won a regional title, 1977-78 season.", "IHSA team titles, 1977-78", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 1979", 1979.17, null, ["sports"], "lv-reg", "MacArthur Girls Basketball: Regional", "MacArthur girls basketball won a regional title, 1978-79 season.", "IHSA team titles, 1978-79", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 1995", 1995.17, null, ["sports"], "lv-reg", "MacArthur Girls Basketball: Regional", "MacArthur girls basketball won a regional title, 1994-95 season (Class AA).", "IHSA team titles, 1994-95", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 2009", 2009.17, null, ["sports"], "lv-reg", "MacArthur Girls Basketball: Regional", "MacArthur girls basketball won a regional title, 2008-09 season (Class 3A).", "IHSA team titles, 2008-09", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 2010", 2010.17, null, ["sports"], "lv-reg", "MacArthur Girls Basketball: Regional", "MacArthur girls basketball won a regional title, 2009-10 season (Class 3A).", "IHSA team titles, 2009-10", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 2019", 2019.17, null, ["sports"], "lv-reg", "MacArthur Girls Basketball: Regional", "MacArthur girls basketball won a regional title, 2018-19 season (Class 3A).", "IHSA team titles, 2018-19", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 2020", 2020.17, null, ["sports"], "lv-reg", "MacArthur Girls Basketball: Regional", "MacArthur girls basketball won a regional title, 2019-20 season (Class 3A).", "IHSA team titles, 2019-20", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 2022", 2022.17, null, ["sports"], "lv-reg", "MacArthur Girls Basketball: Regional", "MacArthur girls basketball won a regional title, 2021-22 season (Class 3A).", "IHSA team titles, 2021-22", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 2025", 2025.17, null, ["sports"], "lv-reg", "MacArthur Girls Basketball: Regional", "MacArthur girls basketball won a regional title, 2024-25 season (Class 3A).", "IHSA team titles, 2024-25", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 2026", 2026.17, null, ["sports"], "lv-sect", "MacArthur Girls Basketball: Sectional", "MacArthur girls basketball won a sectional title, won a regional title, 2025-26 season (Class 3A).", "IHSA team titles, 2025-26", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February 1981", 1981.1, null, ["sports"], "lv-dist", "MacArthur Girls Bowling: State qualifier", "MacArthur girls bowling qualified as a team for state, 1980-81 season.", "IHSA team titles, 1980-81", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February 1982", 1982.1, null, ["sports"], "lv-dist", "MacArthur Girls Bowling: District", "MacArthur girls bowling won a district title, qualified as a team for state, 1981-82 season.", "IHSA team titles, 1981-82", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February 1983", 1983.1, null, ["sports"], "lv-sect", "MacArthur Girls Bowling: Sectional", "MacArthur girls bowling won a sectional title, qualified as a team for state, 1982-83 season.", "IHSA team titles, 1982-83", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February 1985", 1985.1, null, ["sports"], "lv-sect", "MacArthur Girls Bowling: Sectional", "MacArthur girls bowling won a sectional title, qualified as a team for state, 1984-85 season.", "IHSA team titles, 1984-85", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February 1997", 1997.1, null, ["sports"], "lv-dist", "MacArthur Girls Bowling: State qualifier", "MacArthur girls bowling qualified as a team for state, 1996-97 season.", "IHSA team titles, 1996-97", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February 1998", 1998.1, null, ["sports"], "lv-sect", "MacArthur Girls Bowling: Sectional", "MacArthur girls bowling won a sectional title, qualified as a team for state, 1997-98 season.", "IHSA team titles, 1997-98", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1979", 1979.85, null, ["sports"], "lv-dist", "MacArthur Girls Cross Country: District", "MacArthur girls cross country won a district title, qualified as a team for state, 1979-80 season.", "IHSA team titles, 1979-80", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1989", 1989.85, null, ["sports"], "lv-reg", "MacArthur Girls Cross Country: Regional", "MacArthur girls cross country won a regional title, qualified as a team for state, 1989-90 season (Class AA).", "IHSA team titles, 1989-90", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1990", 1990.85, null, ["sports"], "lv-sect", "MacArthur Girls Cross Country: Sectional", "MacArthur girls cross country won a sectional title, won a regional title, qualified as a team for state, 1990-91 season (Class AA).", "IHSA team titles, 1990-91", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1991", 1991.85, null, ["sports"], "lv-sect", "MacArthur Girls Cross Country: Sectional", "MacArthur girls cross country won a sectional title, won a regional title, qualified as a team for state, 1991-92 season (Class AA).", "IHSA team titles, 1991-92", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1992", 1992.85, null, ["sports"], "lv-sect", "MacArthur Girls Cross Country: Sectional", "MacArthur girls cross country won a sectional title, won a regional title, qualified as a team for state, 1992-93 season (Class AA).", "IHSA team titles, 1992-93", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1993", 1993.85, null, ["sports"], "lv-sect", "MacArthur Girls Cross Country: Sectional", "MacArthur girls cross country won a sectional title, won a regional title, qualified as a team for state, 1993-94 season (Class AA).", "IHSA team titles, 1993-94", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1994", 1994.85, null, ["sports"], "lv-reg", "MacArthur Girls Cross Country: Regional", "MacArthur girls cross country won a regional title, qualified as a team for state, 1994-95 season (Class AA).", "IHSA team titles, 1994-95", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1995", 1995.85, null, ["sports"], "lv-sect", "MacArthur Girls Cross Country: Sectional", "MacArthur girls cross country won a sectional title, won a regional title, qualified as a team for state, 1995-96 season (Class AA).", "IHSA team titles, 1995-96", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1976", 1976.85, null, ["sports"], "lv-dist", "MacArthur Girls Golf: District", "MacArthur girls golf won a district title, qualified as a team for state, 1976-77 season.", "IHSA team titles, 1976-77", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1977", 1977.85, null, ["sports"], "lv-dist", "MacArthur Girls Golf: District", "MacArthur girls golf won a district title, qualified as a team for state, 1977-78 season.", "IHSA team titles, 1977-78", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1978", 1978.85, null, ["sports"], "lv-dist", "MacArthur Girls Golf: District", "MacArthur girls golf won a district title, qualified as a team for state, 1978-79 season.", "IHSA team titles, 1978-79", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 2009", 2009.85, null, ["sports"], "lv-sect", "MacArthur Girls Tennis: Sectional", "MacArthur girls tennis won a sectional title, 2009-10 season.", "IHSA team titles, 2009-10", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1979", 1979.85, null, ["sports"], "lv-sect", "MacArthur Girls Volleyball: Sectional", "MacArthur girls volleyball won a sectional title, won a district title, 1979-80 season (Class AA).", "IHSA team titles, 1979-80", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1980", 1980.85, null, ["sports"], "lv-dist", "MacArthur Girls Volleyball: District", "MacArthur girls volleyball won a district title, 1980-81 season (Class AA).", "IHSA team titles, 1980-81", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Winter 1975", 1975.15, null, ["sports"], "lv-dist", "MacArthur Group Interpretation: District", "MacArthur group interpretation won a district title, 1974-75 season.", "IHSA team titles, 1974-75", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Winter 1989", 1989.15, null, ["sports"], "lv-reg", "MacArthur Group Interpretation: Regional", "MacArthur group interpretation won a regional title, 1988-89 season.", "IHSA team titles, 1988-89", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Winter 1991", 1991.15, null, ["sports"], "lv-sect", "MacArthur Scholastic Bowl: Sectional", "MacArthur scholastic bowl won a sectional title, qualified as a team for state, 1990-91 season.", "IHSA team titles, 1990-91", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Winter 1992", 1992.15, null, ["sports"], "lv-sect", "MacArthur Scholastic Bowl: Sectional", "MacArthur scholastic bowl won a sectional title, qualified as a team for state, 1991-92 season (Class AA).", "IHSA team titles, 1991-92", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Winter 1993", 1993.15, null, ["sports"], "lv-sect", "MacArthur Scholastic Bowl: Sectional", "MacArthur scholastic bowl won a sectional title, qualified as a team for state, 1992-93 season (Class AA).", "IHSA team titles, 1992-93", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Winter 1994", 1994.15, null, ["sports"], "lv-sect", "MacArthur Scholastic Bowl: Sectional", "MacArthur scholastic bowl won a sectional title, qualified as a team for state, 1993-94 season (Class AA).", "IHSA team titles, 1993-94", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Winter 1995", 1995.15, null, ["sports"], "lv-sect", "MacArthur Scholastic Bowl: Sectional", "MacArthur scholastic bowl won a sectional title, qualified as a team for state, 1994-95 season (Class AA).", "IHSA team titles, 1994-95", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Winter 1996", 1996.15, null, ["sports"], "lv-sect", "MacArthur Scholastic Bowl: Sectional", "MacArthur scholastic bowl won a sectional title, qualified as a team for state, 1995-96 season (Class AA).", "IHSA team titles, 1995-96", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Winter 1998", 1998.15, null, ["sports"], "lv-sect", "MacArthur Scholastic Bowl: Sectional", "MacArthur scholastic bowl won a sectional title, qualified as a team for state, 1997-98 season (Class AA).", "IHSA team titles, 1997-98", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Winter 1999", 1999.15, null, ["sports"], "lv-sect", "MacArthur Scholastic Bowl: Sectional", "MacArthur scholastic bowl won a sectional title, qualified as a team for state, 1998-99 season (Class AA).", "IHSA team titles, 1998-99", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Winter 2004", 2004.15, null, ["sports"], "lv-sect", "MacArthur Scholastic Bowl: Sectional", "MacArthur scholastic bowl won a sectional title, won a regional title, qualified as a team for state, 2003-04 season (Class AA).", "IHSA team titles, 2003-04", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Winter 2005", 2005.15, null, ["sports"], "lv-reg", "MacArthur Scholastic Bowl: Regional", "MacArthur scholastic bowl won a regional title, 2004-05 season (Class AA).", "IHSA team titles, 2004-05", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Winter 2007", 2007.15, null, ["sports"], "lv-reg", "MacArthur Scholastic Bowl: Regional", "MacArthur scholastic bowl won a regional title, 2006-07 season (Class AA).", "IHSA team titles, 2006-07", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May-June 1989", 1989.4, null, ["sports"], "lv-reg", "MacArthur Softball: Regional", "MacArthur softball won a regional title, 1988-89 season (Class AA).", "IHSA team titles, 1988-89", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May-June 2010", 2010.4, null, ["sports"], "lv-reg", "MacArthur Softball: Regional", "MacArthur softball won a regional title, 2009-10 season (Class 3A).", "IHSA team titles, 2009-10", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Winter 1975", 1975.15, null, ["sports"], "lv-dist", "MacArthur Speech Individual Events: District", "MacArthur speech individual events won a district title, 1974-75 season.", "IHSA team titles, 1974-75", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Winter 1976", 1976.15, null, ["sports"], "lv-dist", "MacArthur Speech Individual Events: District", "MacArthur speech individual events won a district title, 1975-76 season.", "IHSA team titles, 1975-76", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Winter 1982", 1982.15, null, ["sports"], "lv-dist", "MacArthur Speech Individual Events: District", "MacArthur speech individual events won a district title, 1981-82 season.", "IHSA team titles, 1981-82", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Winter 1983", 1983.15, null, ["sports"], "lv-reg", "MacArthur Speech Individual Events: Regional", "MacArthur speech individual events won a regional title, 1982-83 season.", "IHSA team titles, 1982-83", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Winter 1984", 1984.15, null, ["sports"], "lv-sect", "MacArthur Speech Individual Events: Sectional", "MacArthur speech individual events won a sectional title, won a regional title, 1983-84 season.", "IHSA team titles, 1983-84", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Winter 1977", 1977.15, null, ["sports"], "lv-sect", "MacArthur Speech Individual Events: Sectional", "MacArthur speech individual events won a sectional title, 1976-77 season.", "IHSA team titles, 1976-77", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May-June 1961", 1961.4, null, ["sports"], "lv-state", "Eisenhower Baseball: State finals", "Eisenhower baseball reached the state finals, won a sectional title, won a regional title, 1960-61 season.", "IHSA team titles, 1960-61", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May-June 1962", 1962.4, null, ["sports"], "lv-state", "Eisenhower Baseball: State finals", "Eisenhower baseball reached the state finals, won a sectional title, won a regional title, 1961-62 season.", "IHSA team titles, 1961-62", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May-June 1958", 1958.4, null, ["sports"], "lv-reg", "Eisenhower Baseball: Regional", "Eisenhower baseball won a regional title, 1957-58 season.", "IHSA team titles, 1957-58", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May-June 1966", 1966.4, null, ["sports"], "lv-reg", "Eisenhower Baseball: Regional", "Eisenhower baseball won a regional title, 1965-66 season.", "IHSA team titles, 1965-66", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 1976", 1976.17, null, ["sports"], "lv-state", "Eisenhower Boys Basketball: State finals", "Eisenhower boys basketball reached the state finals, won a super-sectional, won a sectional title, won a regional title, 1975-76 season (Class AA).", "IHSA team titles, 1975-76", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 1958", 1958.17, null, ["sports"], "lv-reg", "Eisenhower Boys Basketball: Regional", "Eisenhower boys basketball won a regional title, 1957-58 season.", "IHSA team titles, 1957-58", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 1969", 1969.17, null, ["sports"], "lv-reg", "Eisenhower Boys Basketball: Regional", "Eisenhower boys basketball won a regional title, 1968-69 season.", "IHSA team titles, 1968-69", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 1970", 1970.17, null, ["sports"], "lv-reg", "Eisenhower Boys Basketball: Regional", "Eisenhower boys basketball won a regional title, 1969-70 season.", "IHSA team titles, 1969-70", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 1971", 1971.17, null, ["sports"], "lv-reg", "Eisenhower Boys Basketball: Regional", "Eisenhower boys basketball won a regional title, 1970-71 season.", "IHSA team titles, 1970-71", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 1972", 1972.17, null, ["sports"], "lv-reg", "Eisenhower Boys Basketball: Regional", "Eisenhower boys basketball won a regional title, 1971-72 season (Class AA).", "IHSA team titles, 1971-72", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 1973", 1973.17, null, ["sports"], "lv-reg", "Eisenhower Boys Basketball: Regional", "Eisenhower boys basketball won a regional title, 1972-73 season (Class AA).", "IHSA team titles, 1972-73", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 1974", 1974.17, null, ["sports"], "lv-reg", "Eisenhower Boys Basketball: Regional", "Eisenhower boys basketball won a regional title, 1973-74 season (Class AA).", "IHSA team titles, 1973-74", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 1975", 1975.17, null, ["sports"], "lv-sect", "Eisenhower Boys Basketball: Sectional", "Eisenhower boys basketball won a sectional title, won a regional title, 1974-75 season (Class AA).", "IHSA team titles, 1974-75", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 1979", 1979.17, null, ["sports"], "lv-reg", "Eisenhower Boys Basketball: Regional", "Eisenhower boys basketball won a regional title, 1978-79 season (Class AA).", "IHSA team titles, 1978-79", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 1980", 1980.17, null, ["sports"], "lv-reg", "Eisenhower Boys Basketball: Regional", "Eisenhower boys basketball won a regional title, 1979-80 season (Class AA).", "IHSA team titles, 1979-80", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 1983", 1983.17, null, ["sports"], "lv-reg", "Eisenhower Boys Basketball: Regional", "Eisenhower boys basketball won a regional title, 1982-83 season (Class AA).", "IHSA team titles, 1982-83", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 1984", 1984.17, null, ["sports"], "lv-reg", "Eisenhower Boys Basketball: Regional", "Eisenhower boys basketball won a regional title, 1983-84 season (Class AA).", "IHSA team titles, 1983-84", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 1987", 1987.17, null, ["sports"], "lv-reg", "Eisenhower Boys Basketball: Regional", "Eisenhower boys basketball won a regional title, 1986-87 season (Class AA).", "IHSA team titles, 1986-87", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 2006", 2006.17, null, ["sports"], "lv-reg", "Eisenhower Boys Basketball: Regional", "Eisenhower boys basketball won a regional title, 2005-06 season (Class AA).", "IHSA team titles, 2005-06", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 2007", 2007.17, null, ["sports"], "lv-sect", "Eisenhower Boys Basketball: Sectional", "Eisenhower boys basketball won a sectional title, won a regional title, 2006-07 season (Class AA).", "IHSA team titles, 2006-07", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 2008", 2008.17, null, ["sports"], "lv-reg", "Eisenhower Boys Basketball: Regional", "Eisenhower boys basketball won a regional title, 2007-08 season (Class 3A).", "IHSA team titles, 2007-08", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 2017", 2017.17, null, ["sports"], "lv-reg", "Eisenhower Boys Basketball: Regional", "Eisenhower boys basketball won a regional title, 2016-17 season (Class 3A).", "IHSA team titles, 2016-17", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1978", 1978.85, null, ["sports"], "lv-dist", "Eisenhower Boys Golf: State qualifier", "Eisenhower boys golf qualified as a team for state, 1978-79 season (Class AA).", "IHSA team titles, 1978-79", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 2000", 2000.85, null, ["sports"], "lv-reg", "Eisenhower Boys Golf: Regional", "Eisenhower boys golf won a regional title, qualified as a team for state, 2000-01 season (Class AA).", "IHSA team titles, 2000-01", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1977", 1977.85, null, ["sports"], "lv-dist", "Eisenhower Boys Golf: District", "Eisenhower boys golf won a district title, 1977-78 season (Class AA).", "IHSA team titles, 1977-78", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1979", 1979.85, null, ["sports"], "lv-dist", "Eisenhower Boys Golf: District", "Eisenhower boys golf won a district title, 1979-80 season (Class AA).", "IHSA team titles, 1979-80", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1981", 1981.85, null, ["sports"], "lv-dist", "Eisenhower Boys Golf: District", "Eisenhower boys golf won a district title, 1981-82 season (Class AA).", "IHSA team titles, 1981-82", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1987", 1987.85, null, ["sports"], "lv-reg", "Eisenhower Boys Soccer: Regional", "Eisenhower boys soccer won a regional title, 1987-88 season.", "IHSA team titles, 1987-88", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1990", 1990.85, null, ["sports"], "lv-sect", "Eisenhower Boys Soccer: Sectional", "Eisenhower boys soccer won a sectional title, won a regional title, 1990-91 season.", "IHSA team titles, 1990-91", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1994", 1994.85, null, ["sports"], "lv-sect", "Eisenhower Boys Soccer: Sectional", "Eisenhower boys soccer won a sectional title, won a regional title, 1994-95 season.", "IHSA team titles, 1994-95", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1995", 1995.85, null, ["sports"], "lv-reg", "Eisenhower Boys Soccer: Regional", "Eisenhower boys soccer won a regional title, 1995-96 season.", "IHSA team titles, 1995-96", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 1982", 1982.37, null, ["sports"], "lv-dist", "Eisenhower Boys Tennis: District", "Eisenhower boys tennis won a district title, 1981-82 season.", "IHSA team titles, 1981-82", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 1983", 1983.37, null, ["sports"], "lv-sect", "Eisenhower Boys Tennis: Sectional", "Eisenhower boys tennis won a sectional title, 1982-83 season.", "IHSA team titles, 1982-83", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 1988", 1988.37, null, ["sports"], "lv-sect", "Eisenhower Boys Tennis: Sectional", "Eisenhower boys tennis won a sectional title, 1987-88 season.", "IHSA team titles, 1987-88", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 1989", 1989.37, null, ["sports"], "lv-sect", "Eisenhower Boys Tennis: Sectional", "Eisenhower boys tennis won a sectional title, 1988-89 season.", "IHSA team titles, 1988-89", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 1990", 1990.37, null, ["sports"], "lv-sect", "Eisenhower Boys Tennis: Sectional", "Eisenhower boys tennis won a sectional title, 1989-90 season.", "IHSA team titles, 1989-90", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 1991", 1991.37, null, ["sports"], "lv-sect", "Eisenhower Boys Tennis: Sectional", "Eisenhower boys tennis won a sectional title, 1990-91 season.", "IHSA team titles, 1990-91", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 1992", 1992.37, null, ["sports"], "lv-sect", "Eisenhower Boys Tennis: Sectional", "Eisenhower boys tennis won a sectional title, 1991-92 season.", "IHSA team titles, 1991-92", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 1997", 1997.37, null, ["sports"], "lv-sect", "Eisenhower Boys Tennis: Sectional", "Eisenhower boys tennis won a sectional title, 1996-97 season.", "IHSA team titles, 1996-97", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 2001", 2001.37, null, ["sports"], "lv-sect", "Eisenhower Boys Tennis: Sectional", "Eisenhower boys tennis won a sectional title, 2000-01 season.", "IHSA team titles, 2000-01", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 1974", 1974.37, null, ["sports"], "lv-dist", "Eisenhower Boys Track & Field: District", "Eisenhower boys track & field won a district title, 1973-74 season.", "IHSA team titles, 1973-74", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 1995", 1995.37, null, ["sports"], "lv-sect", "Eisenhower Boys Track & Field: Sectional", "Eisenhower boys track & field won a sectional title, 1994-95 season (Class AA).", "IHSA team titles, 1994-95", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 2004", 2004.37, null, ["sports"], "lv-sect", "Eisenhower Boys Track & Field: Sectional", "Eisenhower boys track & field won a sectional title, 2003-04 season (Class AA).", "IHSA team titles, 2003-04", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 2005", 2005.37, null, ["sports"], "lv-sect", "Eisenhower Boys Track & Field: Sectional", "Eisenhower boys track & field won a sectional title, 2004-05 season (Class AA).", "IHSA team titles, 2004-05", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February 1961", 1961.1, null, ["sports"], "lv-dist", "Eisenhower Boys Wrestling: District", "Eisenhower boys wrestling won a district title, 1960-61 season.", "IHSA team titles, 1960-61", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February 1962", 1962.1, null, ["sports"], "lv-dist", "Eisenhower Boys Wrestling: District", "Eisenhower boys wrestling won a district title, 1961-62 season.", "IHSA team titles, 1961-62", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February 1973", 1973.1, null, ["sports"], "lv-dist", "Eisenhower Boys Wrestling: District", "Eisenhower boys wrestling won a district title, 1972-73 season.", "IHSA team titles, 1972-73", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February 1974", 1974.1, null, ["sports"], "lv-dist", "Eisenhower Boys Wrestling: District", "Eisenhower boys wrestling won a district title, 1973-74 season (Class AA).", "IHSA team titles, 1973-74", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1992", 1992.85, null, ["sports"], "lv-dist", "Eisenhower Football: State playoffs", "Eisenhower football made the state playoffs, 1992-93 season (Class 4A).", "IHSA team titles, 1992-93", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1995", 1995.85, null, ["sports"], "lv-dist", "Eisenhower Football: State playoffs", "Eisenhower football made the state playoffs, 1995-96 season (Class 4A).", "IHSA team titles, 1995-96", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 2004", 2004.85, null, ["sports"], "lv-dist", "Eisenhower Football: State playoffs", "Eisenhower football made the state playoffs, 2004-05 season (Class 6A).", "IHSA team titles, 2004-05", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 2015", 2015.85, null, ["sports"], "lv-dist", "Eisenhower Football: State playoffs", "Eisenhower football made the state playoffs, 2015-16 season (Class 5A).", "IHSA team titles, 2015-16", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 2016", 2016.85, null, ["sports"], "lv-dist", "Eisenhower Football: State playoffs", "Eisenhower football made the state playoffs, 2016-17 season (Class 5A).", "IHSA team titles, 2016-17", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 1977", 1977.17, null, ["sports"], "lv-reg", "Eisenhower Girls Basketball: Regional", "Eisenhower girls basketball won a regional title, 1976-77 season.", "IHSA team titles, 1976-77", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 1984", 1984.17, null, ["sports"], "lv-sect", "Eisenhower Girls Basketball: Sectional", "Eisenhower girls basketball won a sectional title, won a regional title, 1983-84 season (Class AA).", "IHSA team titles, 1983-84", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 1985", 1985.17, null, ["sports"], "lv-reg", "Eisenhower Girls Basketball: Regional", "Eisenhower girls basketball won a regional title, 1984-85 season (Class AA).", "IHSA team titles, 1984-85", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 1993", 1993.17, null, ["sports"], "lv-reg", "Eisenhower Girls Basketball: Regional", "Eisenhower girls basketball won a regional title, 1992-93 season (Class AA).", "IHSA team titles, 1992-93", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 2011", 2011.17, null, ["sports"], "lv-reg", "Eisenhower Girls Basketball: Regional", "Eisenhower girls basketball won a regional title, 2010-11 season (Class 3A).", "IHSA team titles, 2010-11", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February 1984", 1984.1, null, ["sports"], "lv-sect", "Eisenhower Girls Bowling: Sectional", "Eisenhower girls bowling won a sectional title, qualified as a team for state, 1983-84 season.", "IHSA team titles, 1983-84", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February 1986", 1986.1, null, ["sports"], "lv-sect", "Eisenhower Girls Bowling: Sectional", "Eisenhower girls bowling won a sectional title, qualified as a team for state, 1985-86 season.", "IHSA team titles, 1985-86", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February 1987", 1987.1, null, ["sports"], "lv-sect", "Eisenhower Girls Bowling: Sectional", "Eisenhower girls bowling won a sectional title, qualified as a team for state, 1986-87 season.", "IHSA team titles, 1986-87", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February 1988", 1988.1, null, ["sports"], "lv-sect", "Eisenhower Girls Bowling: Sectional", "Eisenhower girls bowling won a sectional title, qualified as a team for state, 1987-88 season.", "IHSA team titles, 1987-88", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February 1989", 1989.1, null, ["sports"], "lv-sect", "Eisenhower Girls Bowling: Sectional", "Eisenhower girls bowling won a sectional title, qualified as a team for state, 1988-89 season.", "IHSA team titles, 1988-89", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February 1990", 1990.1, null, ["sports"], "lv-sect", "Eisenhower Girls Bowling: Sectional", "Eisenhower girls bowling won a sectional title, qualified as a team for state, 1989-90 season.", "IHSA team titles, 1989-90", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February 1991", 1991.1, null, ["sports"], "lv-sect", "Eisenhower Girls Bowling: Sectional", "Eisenhower girls bowling won a sectional title, qualified as a team for state, 1990-91 season.", "IHSA team titles, 1990-91", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February 1993", 1993.1, null, ["sports"], "lv-dist", "Eisenhower Girls Bowling: State qualifier", "Eisenhower girls bowling qualified as a team for state, 1992-93 season.", "IHSA team titles, 1992-93", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February 1996", 1996.1, null, ["sports"], "lv-dist", "Eisenhower Girls Bowling: State qualifier", "Eisenhower girls bowling qualified as a team for state, 1995-96 season.", "IHSA team titles, 1995-96", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February 2000", 2000.1, null, ["sports"], "lv-sect", "Eisenhower Girls Bowling: Sectional", "Eisenhower girls bowling won a sectional title, qualified as a team for state, 1999-00 season.", "IHSA team titles, 1999-00", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February 2001", 2001.1, null, ["sports"], "lv-dist", "Eisenhower Girls Bowling: State qualifier", "Eisenhower girls bowling qualified as a team for state, 2000-01 season.", "IHSA team titles, 2000-01", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February 2019", 2019.1, null, ["sports"], "lv-reg", "Eisenhower Girls Bowling: Regional", "Eisenhower girls bowling won a regional title, 2018-19 season.", "IHSA team titles, 2018-19", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February 2022", 2022.1, null, ["sports"], "lv-reg", "Eisenhower Girls Bowling: Regional", "Eisenhower girls bowling won a regional title, 2021-22 season.", "IHSA team titles, 2021-22", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1982", 1982.85, null, ["sports"], "lv-reg", "Eisenhower Girls Cross Country: Regional", "Eisenhower girls cross country won a regional title, qualified as a team for state, 1982-83 season.", "IHSA team titles, 1982-83", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1988", 1988.85, null, ["sports"], "lv-reg", "Eisenhower Girls Cross Country: Regional", "Eisenhower girls cross country won a regional title, qualified as a team for state, 1988-89 season (Class AA).", "IHSA team titles, 1988-89", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1996", 1996.85, null, ["sports"], "lv-dist", "Eisenhower Girls Cross Country: State qualifier", "Eisenhower girls cross country qualified as a team for state, 1996-97 season (Class AA).", "IHSA team titles, 1996-97", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 2004", 2004.85, null, ["sports"], "lv-reg", "Eisenhower Girls Cross Country: Regional", "Eisenhower girls cross country won a regional title, 2004-05 season (Class AA).", "IHSA team titles, 2004-05", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1995", 1995.85, null, ["sports"], "lv-sect", "Eisenhower Girls Golf: Sectional", "Eisenhower girls golf won a sectional title, won a regional title, qualified as a team for state, 1995-96 season.", "IHSA team titles, 1995-96", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1996", 1996.85, null, ["sports"], "lv-sect", "Eisenhower Girls Golf: Sectional", "Eisenhower girls golf won a sectional title, won a regional title, qualified as a team for state, 1996-97 season.", "IHSA team titles, 1996-97", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1997", 1997.85, null, ["sports"], "lv-reg", "Eisenhower Girls Golf: Regional", "Eisenhower girls golf won a regional title, qualified as a team for state, 1997-98 season.", "IHSA team titles, 1997-98", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1998", 1998.85, null, ["sports"], "lv-reg", "Eisenhower Girls Golf: Regional", "Eisenhower girls golf won a regional title, qualified as a team for state, 1998-99 season.", "IHSA team titles, 1998-99", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1999", 1999.85, null, ["sports"], "lv-dist", "Eisenhower Girls Golf: State qualifier", "Eisenhower girls golf qualified as a team for state, 1999-00 season.", "IHSA team titles, 1999-00", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 2000", 2000.85, null, ["sports"], "lv-dist", "Eisenhower Girls Golf: State qualifier", "Eisenhower girls golf qualified as a team for state, 2000-01 season.", "IHSA team titles, 2000-01", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1974", 1974.85, null, ["sports"], "lv-dist", "Eisenhower Girls Tennis: District", "Eisenhower girls tennis won a district title, 1974-75 season.", "IHSA team titles, 1974-75", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1975", 1975.85, null, ["sports"], "lv-dist", "Eisenhower Girls Tennis: District", "Eisenhower girls tennis won a district title, 1975-76 season.", "IHSA team titles, 1975-76", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1978", 1978.85, null, ["sports"], "lv-dist", "Eisenhower Girls Tennis: District", "Eisenhower girls tennis won a district title, 1978-79 season.", "IHSA team titles, 1978-79", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1983", 1983.85, null, ["sports"], "lv-sect", "Eisenhower Girls Tennis: Sectional", "Eisenhower girls tennis won a sectional title, 1983-84 season.", "IHSA team titles, 1983-84", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1984", 1984.85, null, ["sports"], "lv-sect", "Eisenhower Girls Tennis: Sectional", "Eisenhower girls tennis won a sectional title, 1984-85 season.", "IHSA team titles, 1984-85", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1986", 1986.85, null, ["sports"], "lv-sect", "Eisenhower Girls Tennis: Sectional", "Eisenhower girls tennis won a sectional title, 1986-87 season.", "IHSA team titles, 1986-87", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1988", 1988.85, null, ["sports"], "lv-sect", "Eisenhower Girls Tennis: Sectional", "Eisenhower girls tennis won a sectional title, 1988-89 season.", "IHSA team titles, 1988-89", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1991", 1991.85, null, ["sports"], "lv-sect", "Eisenhower Girls Tennis: Sectional", "Eisenhower girls tennis won a sectional title, 1991-92 season.", "IHSA team titles, 1991-92", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1995", 1995.85, null, ["sports"], "lv-sect", "Eisenhower Girls Tennis: Sectional", "Eisenhower girls tennis won a sectional title, 1995-96 season.", "IHSA team titles, 1995-96", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1997", 1997.85, null, ["sports"], "lv-sect", "Eisenhower Girls Tennis: Sectional", "Eisenhower girls tennis won a sectional title, 1997-98 season.", "IHSA team titles, 1997-98", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1982", 1982.85, null, ["sports"], "lv-reg", "Eisenhower Girls Volleyball: Regional", "Eisenhower girls volleyball won a regional title, 1982-83 season (Class AA).", "IHSA team titles, 1982-83", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1983", 1983.85, null, ["sports"], "lv-reg", "Eisenhower Girls Volleyball: Regional", "Eisenhower girls volleyball won a regional title, 1983-84 season (Class AA).", "IHSA team titles, 1983-84", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1984", 1984.85, null, ["sports"], "lv-reg", "Eisenhower Girls Volleyball: Regional", "Eisenhower girls volleyball won a regional title, 1984-85 season (Class AA).", "IHSA team titles, 1984-85", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1985", 1985.85, null, ["sports"], "lv-reg", "Eisenhower Girls Volleyball: Regional", "Eisenhower girls volleyball won a regional title, 1985-86 season (Class AA).", "IHSA team titles, 1985-86", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1986", 1986.85, null, ["sports"], "lv-reg", "Eisenhower Girls Volleyball: Regional", "Eisenhower girls volleyball won a regional title, 1986-87 season (Class AA).", "IHSA team titles, 1986-87", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1988", 1988.85, null, ["sports"], "lv-reg", "Eisenhower Girls Volleyball: Regional", "Eisenhower girls volleyball won a regional title, 1988-89 season (Class AA).", "IHSA team titles, 1988-89", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1989", 1989.85, null, ["sports"], "lv-reg", "Eisenhower Girls Volleyball: Regional", "Eisenhower girls volleyball won a regional title, 1989-90 season (Class AA).", "IHSA team titles, 1989-90", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1990", 1990.85, null, ["sports"], "lv-reg", "Eisenhower Girls Volleyball: Regional", "Eisenhower girls volleyball won a regional title, 1990-91 season (Class AA).", "IHSA team titles, 1990-91", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1991", 1991.85, null, ["sports"], "lv-reg", "Eisenhower Girls Volleyball: Regional", "Eisenhower girls volleyball won a regional title, 1991-92 season (Class AA).", "IHSA team titles, 1991-92", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1992", 1992.85, null, ["sports"], "lv-reg", "Eisenhower Girls Volleyball: Regional", "Eisenhower girls volleyball won a regional title, 1992-93 season (Class AA).", "IHSA team titles, 1992-93", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1993", 1993.85, null, ["sports"], "lv-reg", "Eisenhower Girls Volleyball: Regional", "Eisenhower girls volleyball won a regional title, 1993-94 season (Class AA).", "IHSA team titles, 1993-94", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1994", 1994.85, null, ["sports"], "lv-sect", "Eisenhower Girls Volleyball: Sectional", "Eisenhower girls volleyball won a sectional title, won a regional title, 1994-95 season (Class AA).", "IHSA team titles, 1994-95", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1995", 1995.85, null, ["sports"], "lv-sect", "Eisenhower Girls Volleyball: Sectional", "Eisenhower girls volleyball won a sectional title, won a regional title, 1995-96 season (Class AA).", "IHSA team titles, 1995-96", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 2000", 2000.85, null, ["sports"], "lv-reg", "Eisenhower Girls Volleyball: Regional", "Eisenhower girls volleyball won a regional title, 2000-01 season (Class AA).", "IHSA team titles, 2000-01", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 2001", 2001.85, null, ["sports"], "lv-reg", "Eisenhower Girls Volleyball: Regional", "Eisenhower girls volleyball won a regional title, 2001-02 season (Class AA).", "IHSA team titles, 2001-02", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Winter 1974", 1974.15, null, ["sports"], "lv-dist", "Eisenhower Group Interpretation: State qualifier", "Eisenhower group interpretation qualified as a team for state, 1973-74 season.", "IHSA team titles, 1973-74", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Winter 1989", 1989.15, null, ["sports"], "lv-sect", "Eisenhower Scholastic Bowl: Sectional", "Eisenhower scholastic bowl won a sectional title, qualified as a team for state, 1988-89 season.", "IHSA team titles, 1988-89", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May-June 1988", 1988.4, null, ["sports"], "lv-reg", "Eisenhower Softball: Regional", "Eisenhower softball won a regional title, 1987-88 season (Class AA).", "IHSA team titles, 1987-88", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May-June 1990", 1990.4, null, ["sports"], "lv-reg", "Eisenhower Softball: Regional", "Eisenhower softball won a regional title, 1989-90 season (Class AA).", "IHSA team titles, 1989-90", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May-June 1996", 1996.4, null, ["sports"], "lv-reg", "Eisenhower Softball: Regional", "Eisenhower softball won a regional title, 1995-96 season (Class AA).", "IHSA team titles, 1995-96", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May-June 1997", 1997.4, null, ["sports"], "lv-reg", "Eisenhower Softball: Regional", "Eisenhower softball won a regional title, 1996-97 season (Class AA).", "IHSA team titles, 1996-97", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May-June 1998", 1998.4, null, ["sports"], "lv-reg", "Eisenhower Softball: Regional", "Eisenhower softball won a regional title, 1997-98 season (Class AA).", "IHSA team titles, 1997-98", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May-June 1999", 1999.4, null, ["sports"], "lv-reg", "Eisenhower Softball: Regional", "Eisenhower softball won a regional title, 1998-99 season (Class AA).", "IHSA team titles, 1998-99", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May-June 2006", 2006.4, null, ["sports"], "lv-reg", "Eisenhower Softball: Regional", "Eisenhower softball won a regional title, 2005-06 season (Class AA).", "IHSA team titles, 2005-06", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May-June 2008", 2008.4, null, ["sports"], "lv-reg", "Eisenhower Softball: Regional", "Eisenhower softball won a regional title, 2007-08 season (Class 3A).", "IHSA team titles, 2007-08", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May-June 2009", 2009.4, null, ["sports"], "lv-reg", "Eisenhower Softball: Regional", "Eisenhower softball won a regional title, 2008-09 season (Class 3A).", "IHSA team titles, 2008-09", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May-June 1977", 1977.4, null, ["sports"], "lv-state", "Stephen Decatur Baseball: State finals", "Stephen Decatur baseball reached the state finals, won a sectional title, won a regional title, 1976-77 season.", "IHSA team titles, 1976-77", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May-June 1967", 1967.4, null, ["sports"], "lv-reg", "Stephen Decatur Baseball: Regional", "Stephen Decatur baseball won a regional title, 1966-67 season.", "IHSA team titles, 1966-67", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May-June 1970", 1970.4, null, ["sports"], "lv-reg", "Stephen Decatur Baseball: Regional", "Stephen Decatur baseball won a regional title, 1969-70 season.", "IHSA team titles, 1969-70", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 1960", 1960.17, null, ["sports"], "lv-state", "Stephen Decatur Boys Basketball: State finals", "Stephen Decatur boys basketball reached the state finals, won a super-sectional, won a sectional title, won a regional title, 1959-60 season.", "IHSA team titles, 1959-60", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 1962", 1962.17, null, ["sports"], "lv-state", "Stephen Decatur Boys Basketball: State finals", "Stephen Decatur boys basketball reached the state finals, won a super-sectional, won a sectional title, won a regional title, 1961-62 season.", "IHSA team titles, 1961-62", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 1963", 1963.17, null, ["sports"], "lv-state", "Stephen Decatur Boys Basketball: State finals", "Stephen Decatur boys basketball reached the state finals, won a super-sectional, won a sectional title, won a regional title, 1962-63 season.", "IHSA team titles, 1962-63", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 1964", 1964.17, null, ["sports"], "lv-state", "Stephen Decatur Boys Basketball: State finals", "Stephen Decatur boys basketball reached the state finals, won a super-sectional, won a sectional title, won a regional title, 1963-64 season.", "IHSA team titles, 1963-64", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 1965", 1965.17, null, ["sports"], "lv-state", "Stephen Decatur Boys Basketball: State finals", "Stephen Decatur boys basketball reached the state finals, won a super-sectional, won a sectional title, won a regional title, 1964-65 season.", "IHSA team titles, 1964-65", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 1966", 1966.17, null, ["sports"], "lv-state", "Stephen Decatur Boys Basketball: State finals", "Stephen Decatur boys basketball reached the state finals, won a super-sectional, won a sectional title, won a regional title, 1965-66 season.", "IHSA team titles, 1965-66", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 1961", 1961.17, null, ["sports"], "lv-reg", "Stephen Decatur Boys Basketball: Regional", "Stephen Decatur boys basketball won a regional title, 1960-61 season.", "IHSA team titles, 1960-61", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 1967", 1967.17, null, ["sports"], "lv-sect", "Stephen Decatur Boys Basketball: Sectional", "Stephen Decatur boys basketball won a sectional title, won a regional title, 1966-67 season.", "IHSA team titles, 1966-67", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 1968", 1968.17, null, ["sports"], "lv-reg", "Stephen Decatur Boys Basketball: Regional", "Stephen Decatur boys basketball won a regional title, 1967-68 season.", "IHSA team titles, 1967-68", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 1978", 1978.17, null, ["sports"], "lv-reg", "Stephen Decatur Boys Basketball: Regional", "Stephen Decatur boys basketball won a regional title, 1977-78 season (Class AA).", "IHSA team titles, 1977-78", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 1986", 1986.17, null, ["sports"], "lv-sect", "Stephen Decatur Boys Basketball: Sectional", "Stephen Decatur boys basketball won a sectional title, won a regional title, 1985-86 season (Class AA).", "IHSA team titles, 1985-86", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 1997", 1997.17, null, ["sports"], "lv-reg", "Stephen Decatur Boys Basketball: Regional", "Stephen Decatur boys basketball won a regional title, 1996-97 season (Class AA).", "IHSA team titles, 1996-97", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1965", 1965.85, null, ["sports"], "lv-dist", "Stephen Decatur Boys Cross Country: State qualifier", "Stephen Decatur boys cross country qualified as a team for state, 1965-66 season.", "IHSA team titles, 1965-66", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1967", 1967.85, null, ["sports"], "lv-dist", "Stephen Decatur Boys Cross Country: State qualifier", "Stephen Decatur boys cross country qualified as a team for state, 1967-68 season.", "IHSA team titles, 1967-68", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1968", 1968.85, null, ["sports"], "lv-dist", "Stephen Decatur Boys Cross Country: State qualifier", "Stephen Decatur boys cross country qualified as a team for state, 1968-69 season.", "IHSA team titles, 1968-69", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1973", 1973.85, null, ["sports"], "lv-sect", "Stephen Decatur Boys Golf: Sectional", "Stephen Decatur boys golf won a sectional title, qualified as a team for state, 1973-74 season.", "IHSA team titles, 1973-74", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1985", 1985.85, null, ["sports"], "lv-dist", "Stephen Decatur Boys Golf: State qualifier", "Stephen Decatur boys golf qualified as a team for state, 1985-86 season (Class AA).", "IHSA team titles, 1985-86", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1987", 1987.85, null, ["sports"], "lv-dist", "Stephen Decatur Boys Golf: State qualifier", "Stephen Decatur boys golf qualified as a team for state, 1987-88 season (Class AA).", "IHSA team titles, 1987-88", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1976", 1976.85, null, ["sports"], "lv-dist", "Stephen Decatur Boys Golf: District", "Stephen Decatur boys golf won a district title, 1976-77 season (Class AA).", "IHSA team titles, 1976-77", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1982", 1982.85, null, ["sports"], "lv-reg", "Stephen Decatur Boys Golf: Regional", "Stephen Decatur boys golf won a regional title, 1982-83 season (Class AA).", "IHSA team titles, 1982-83", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 1961", 1961.37, null, ["sports"], "lv-dist", "Stephen Decatur Boys Tennis: District", "Stephen Decatur boys tennis won a district title, 1960-61 season.", "IHSA team titles, 1960-61", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 1967", 1967.37, null, ["sports"], "lv-dist", "Stephen Decatur Boys Track & Field: District", "Stephen Decatur boys track & field won a district title, 1966-67 season.", "IHSA team titles, 1966-67", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 1968", 1968.37, null, ["sports"], "lv-dist", "Stephen Decatur Boys Track & Field: District", "Stephen Decatur boys track & field won a district title, 1967-68 season.", "IHSA team titles, 1967-68", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February 1967", 1967.1, null, ["sports"], "lv-dist", "Stephen Decatur Boys Wrestling: District", "Stephen Decatur boys wrestling won a district title, 1966-67 season.", "IHSA team titles, 1966-67", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February 1968", 1968.1, null, ["sports"], "lv-dist", "Stephen Decatur Boys Wrestling: District", "Stephen Decatur boys wrestling won a district title, 1967-68 season.", "IHSA team titles, 1967-68", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February 1969", 1969.1, null, ["sports"], "lv-dist", "Stephen Decatur Boys Wrestling: District", "Stephen Decatur boys wrestling won a district title, 1968-69 season.", "IHSA team titles, 1968-69", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February 1979", 1979.1, null, ["sports"], "lv-dist", "Stephen Decatur Boys Wrestling: District", "Stephen Decatur boys wrestling won a district title, 1978-79 season (Class AA).", "IHSA team titles, 1978-79", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February 1980", 1980.1, null, ["sports"], "lv-dist", "Stephen Decatur Boys Wrestling: District", "Stephen Decatur boys wrestling won a district title, 1979-80 season (Class AA).", "IHSA team titles, 1979-80", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1992", 1992.85, null, ["sports"], "lv-dist", "Stephen Decatur Football: State playoffs", "Stephen Decatur football made the state playoffs, 1992-93 season (Class 4A).", "IHSA team titles, 1992-93", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 1983", 1983.17, null, ["sports"], "lv-sect", "Stephen Decatur Girls Basketball: Sectional", "Stephen Decatur girls basketball won a sectional title, won a regional title, 1982-83 season (Class AA).", "IHSA team titles, 1982-83", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February 1992", 1992.1, null, ["sports"], "lv-sect", "Stephen Decatur Girls Bowling: Sectional", "Stephen Decatur girls bowling won a sectional title, qualified as a team for state, 1991-92 season.", "IHSA team titles, 1991-92", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1989", 1989.85, null, ["sports"], "lv-sect", "Stephen Decatur Girls Tennis: Sectional", "Stephen Decatur girls tennis won a sectional title, 1989-90 season.", "IHSA team titles, 1989-90", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1990", 1990.85, null, ["sports"], "lv-sect", "Stephen Decatur Girls Tennis: Sectional", "Stephen Decatur girls tennis won a sectional title, 1990-91 season.", "IHSA team titles, 1990-91", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1992", 1992.85, null, ["sports"], "lv-sect", "Stephen Decatur Girls Tennis: Sectional", "Stephen Decatur girls tennis won a sectional title, 1992-93 season.", "IHSA team titles, 1992-93", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1981", 1981.85, null, ["sports"], "lv-dist", "Stephen Decatur Girls Volleyball: District", "Stephen Decatur girls volleyball won a district title, 1981-82 season (Class AA).", "IHSA team titles, 1981-82", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1996", 1996.85, null, ["sports"], "lv-reg", "Stephen Decatur Girls Volleyball: Regional", "Stephen Decatur girls volleyball won a regional title, 1996-97 season (Class AA).", "IHSA team titles, 1996-97", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May-June 1947", 1947.4, null, ["sports"], "lv-state", "Decatur High Baseball: State finals", "Decatur High baseball reached the state finals, 1946-47 season.", "IHSA team titles, 1946-47", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May-June 1951", 1951.4, null, ["sports"], "lv-state", "Decatur High Baseball: State finals", "Decatur High baseball reached the state finals, 1950-51 season.", "IHSA team titles, 1950-51", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May-June 1953", 1953.4, null, ["sports"], "lv-state", "Decatur High Baseball: State finals", "Decatur High baseball reached the state finals, 1952-53 season.", "IHSA team titles, 1952-53", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May-June 1955", 1955.4, null, ["sports"], "lv-state", "Decatur High Baseball: State finals", "Decatur High baseball reached the state finals, 1954-55 season.", "IHSA team titles, 1954-55", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 1912", 1912.17, null, ["sports"], "lv-state", "Decatur High Boys Basketball: State finals", "Decatur High boys basketball reached the state finals, 1911-12 season.", "IHSA team titles, 1911-12", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 1915", 1915.17, null, ["sports"], "lv-state", "Decatur High Boys Basketball: State finals", "Decatur High boys basketball reached the state finals, 1914-15 season.", "IHSA team titles, 1914-15", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 1917", 1917.17, null, ["sports"], "lv-state", "Decatur High Boys Basketball: State finals", "Decatur High boys basketball reached the state finals, 1916-17 season.", "IHSA team titles, 1916-17", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 1920", 1920.17, null, ["sports"], "lv-state", "Decatur High Boys Basketball: State finals", "Decatur High boys basketball reached the state finals, 1919-20 season.", "IHSA team titles, 1919-20", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 1921", 1921.17, null, ["sports"], "lv-state", "Decatur High Boys Basketball: State finals", "Decatur High boys basketball reached the state finals, 1920-21 season.", "IHSA team titles, 1920-21", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 1931", 1931.17, null, ["sports"], "lv-state", "Decatur High Boys Basketball: State finals", "Decatur High boys basketball reached the state finals, 1930-31 season.", "IHSA team titles, 1930-31", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 1936", 1936.17, null, ["sports"], "lv-state", "Decatur High Boys Basketball: State finals", "Decatur High boys basketball reached the state finals, 1935-36 season.", "IHSA team titles, 1935-36", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 1937", 1937.17, null, ["sports"], "lv-state", "Decatur High Boys Basketball: State finals", "Decatur High boys basketball reached the state finals, 1936-37 season.", "IHSA team titles, 1936-37", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 1938", 1938.17, null, ["sports"], "lv-state", "Decatur High Boys Basketball: State finals", "Decatur High boys basketball reached the state finals, 1937-38 season.", "IHSA team titles, 1937-38", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 1942", 1942.17, null, ["sports"], "lv-state", "Decatur High Boys Basketball: State finals", "Decatur High boys basketball reached the state finals, 1941-42 season.", "IHSA team titles, 1941-42", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 1943", 1943.17, null, ["sports"], "lv-state", "Decatur High Boys Basketball: State finals", "Decatur High boys basketball reached the state finals, 1942-43 season.", "IHSA team titles, 1942-43", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 1945", 1945.17, null, ["sports"], "lv-state", "Decatur High Boys Basketball: State finals", "Decatur High boys basketball reached the state finals, 1944-45 season.", "IHSA team titles, 1944-45", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 1946", 1946.17, null, ["sports"], "lv-state", "Decatur High Boys Basketball: State finals", "Decatur High boys basketball reached the state finals, 1945-46 season.", "IHSA team titles, 1945-46", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 1949", 1949.17, null, ["sports"], "lv-state", "Decatur High Boys Basketball: State finals", "Decatur High boys basketball reached the state finals, 1948-49 season.", "IHSA team titles, 1948-49", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 1951", 1951.17, null, ["sports"], "lv-state", "Decatur High Boys Basketball: State finals", "Decatur High boys basketball reached the state finals, 1950-51 season.", "IHSA team titles, 1950-51", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 1955", 1955.17, null, ["sports"], "lv-state", "Decatur High Boys Basketball: State finals", "Decatur High boys basketball reached the state finals, 1954-55 season.", "IHSA team titles, 1954-55", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1972", 1972.85, null, ["sports"], "lv-dist", "Lakeview Boys Golf: District", "Lakeview boys golf won a district title, qualified as a team for state, 1972-73 season.", "IHSA team titles, 1972-73", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1974", 1974.85, null, ["sports"], "lv-sect", "Lakeview Boys Golf: Sectional", "Lakeview boys golf won a sectional title, qualified as a team for state, 1974-75 season.", "IHSA team titles, 1974-75", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Fall 1978", 1978.85, null, ["sports"], "lv-dist", "Lakeview Boys Golf: District", "Lakeview boys golf won a district title, 1978-79 season (Class AA).", "IHSA team titles, 1978-79", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February-March 1980", 1980.17, null, ["sports"], "lv-sect", "Lakeview Girls Basketball: Sectional", "Lakeview girls basketball won a sectional title, won a regional title, 1979-80 season (Class AA).", "IHSA team titles, 1979-80", "https://www.ihsa.org/data/titles/d.htm"],
+  ["Winter 1965", 1965.15, null, ["sports"], "lv-dist", "Lakeview Speech Individual Events: District", "Lakeview speech individual events won a district title, 1964-65 season.", "IHSA team titles, 1964-65", "https://www.ihsa.org/data/titles/d.htm"],
+
+  // Sports and activities: IHSA trophy finishes (places 1-4), Team Titles Text Summary
+  ["March 1912", 1912.21, null, ["sports"], "event", "Decatur High Boys Basketball: fourth in state", "Decatur High finished 4th in the IHSA state boys basketball competition, 1911-12 season.", "IHSA, 1911-12 season", "https://www.ihsa.org/data/titles/d.htm"],
+  ["March 1951", 1951.21, null, ["sports"], "event", "Decatur High Boys Basketball: fourth in state", "Decatur High finished 4th in the IHSA state boys basketball competition, 1950-51 season.", "IHSA, 1950-51 season", "https://www.ihsa.org/data/titles/d.htm"],
+  ["March 1960", 1960.21, null, ["sports"], "event", "Stephen Decatur Boys Basketball: fourth in state", "Stephen Decatur finished 4th in the IHSA state boys basketball competition, 1959-60 season.", "IHSA, 1959-60 season", "https://www.ihsa.org/data/titles/d.htm"],
+  ["March 1966", 1966.21, null, ["sports"], "event", "Stephen Decatur Boys Basketball: fourth in state", "Stephen Decatur finished 4th in the IHSA state boys basketball competition, 1965-66 season.", "IHSA, 1965-66 season", "https://www.ihsa.org/data/titles/d.htm"],
+  ["March 1964", 1964.21, null, ["sports"], "event", "Stephen Decatur Boys Basketball: third in state", "Stephen Decatur finished 3rd in the IHSA state boys basketball competition, 1963-64 season.", "IHSA, 1963-64 season", "https://www.ihsa.org/data/titles/d.htm"],
+  ["March 1937", 1937.21, null, ["sports"], "event", "Decatur High Boys Basketball: second in state", "Decatur High finished 2nd in the IHSA state boys basketball competition, 1936-37 season. Lost the final to Joliet 40-20.", "IHSA, 1936-37 season", "https://www.ihsa.org/data/bkb/records/team1-2.htm"],
+  ["March 1931", 1931.21, null, ["sports"], "event", "Decatur High Boys Basketball: state champion", "Decatur High finished 1st in the IHSA state boys basketball competition, 1930-31 season. Beat Galesburg 30-26 in the final; coach Gay Kintner. The school's first state title.", "IHSA, 1930-31 season", "https://www.ihsa.org/data/bkb/records/team1-2.htm"],
+  ["March 1936", 1936.21, null, ["sports"], "event", "Decatur High Boys Basketball: state champion", "Decatur High finished 1st in the IHSA state boys basketball competition, 1935-36 season. Beat Danville 26-22 in the final; coach Gay Kintner.", "IHSA, 1935-36 season", "https://www.ihsa.org/data/bkb/records/team1-2.htm"],
+  ["March 1945", 1945.21, null, ["sports"], "event", "Decatur High Boys Basketball: state champion", "Decatur High finished 1st in the IHSA state boys basketball competition, 1944-45 season. Beat Champaign 62-54 in the final; coach Gay Kintner. The school's third state title.", "IHSA, 1944-45 season", "https://www.ihsa.org/data/bkb/records/team1-2.htm"],
+  ["March 1962", 1962.21, null, ["sports"], "event", "Stephen Decatur Boys Basketball: state champion", "Stephen Decatur finished 1st in the IHSA state boys basketball competition, 1961-62 season. Beat Chicago Carver 49-48 in the final; coach John Schneiter.", "IHSA, 1961-62 season", "https://www.ihsa.org/data/bkb/records/team1-2.htm"],
+  ["May 1961", 1961.38, null, ["sports"], "event", "Stephen Decatur Boys Tennis: third in state", "Stephen Decatur finished 3rd in the IHSA state boys tennis competition, 1960-61 season.", "IHSA, 1960-61 season", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 1946", 1946.38, null, ["sports"], "event", "Decatur High Boys Tennis: second in state", "Decatur High finished 2nd in the IHSA state boys tennis competition, 1945-46 season.", "IHSA, 1945-46 season", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 1957", 1957.38, null, ["sports"], "event", "Decatur High Boys Tennis: second in state", "Decatur High finished 2nd in the IHSA state boys tennis competition, 1956-57 season.", "IHSA, 1956-57 season", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 1947", 1947.38, null, ["sports"], "event", "Decatur High Boys Tennis: state champion", "Decatur High finished 1st in the IHSA state boys tennis competition, 1946-47 season.", "IHSA, 1946-47 season", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 1900", 1900.38, null, ["sports"], "event", "Decatur High Boys Track and Field: third in state", "Decatur High finished 3rd in the IHSA state boys track and field competition, 1899-00 season.", "IHSA, 1899-00 season", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February 1968", 1968.12, null, ["sports"], "event", "Stephen Decatur Boys Wrestling: third in state", "Stephen Decatur finished 3rd in the IHSA state boys wrestling competition, 1967-68 season.", "IHSA, 1967-68 season", "https://www.ihsa.org/data/titles/d.htm"],
+  ["June 1962", 1962.45, null, ["sports"], "event", "Eisenhower Baseball: state champion", "Eisenhower finished 1st in the IHSA state baseball competition, 1961-62 season.", "IHSA, 1961-62 season", "https://www.ihsa.org/data/titles/d.htm"],
+  ["March 1976", 1976.21, null, ["sports"], "event", "Eisenhower Boys Basketball (Class AA): fourth in state", "Eisenhower finished 4th in the IHSA state boys basketball competition, 1975-76 season (Class AA).", "IHSA, 1975-76 season", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 1991", 1991.38, null, ["sports"], "event", "Eisenhower Boys Tennis: third in state", "Eisenhower finished 3rd in the IHSA state boys tennis competition, 1990-91 season.", "IHSA, 1990-91 season", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 1990", 1990.38, null, ["sports"], "event", "Eisenhower Boys Tennis: second in state", "Eisenhower finished 2nd in the IHSA state boys tennis competition, 1989-90 season.", "IHSA, 1989-90 season", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February 2000", 2000.12, null, ["sports"], "event", "Eisenhower Girls Bowling: third in state", "Eisenhower finished 3rd in the IHSA state girls bowling competition, 1999-00 season.", "IHSA, 1999-00 season", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February 2001", 2001.12, null, ["sports"], "event", "Eisenhower Girls Bowling: third in state", "Eisenhower finished 3rd in the IHSA state girls bowling competition, 2000-01 season.", "IHSA, 2000-01 season", "https://www.ihsa.org/data/titles/d.htm"],
+  ["February 1991", 1991.12, null, ["sports"], "event", "Eisenhower Girls Bowling: second in state", "Eisenhower finished 2nd in the IHSA state girls bowling competition, 1990-91 season.", "IHSA, 1990-91 season", "https://www.ihsa.org/data/titles/d.htm"],
+  ["October 1995", 1995.8, null, ["sports"], "event", "Eisenhower Girls Golf: second in state", "Eisenhower finished 2nd in the IHSA state girls golf competition, 1995-96 season.", "IHSA, 1995-96 season", "https://www.ihsa.org/data/titles/d.htm"],
+  ["1973-74 season", 1974.1, null, ["sports"], "event", "Eisenhower Group Interpretation: second in state", "Eisenhower finished 2nd in the IHSA state group interpretation competition, 1973-74 season.", "IHSA, 1973-74 season", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 1962", 1962.38, null, ["sports"], "event", "MacArthur Boys Tennis: third in state", "MacArthur finished 3rd in the IHSA state boys tennis competition, 1961-62 season.", "IHSA, 1961-62 season", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 1966", 1966.38, null, ["sports"], "event", "MacArthur Boys Tennis: third in state", "MacArthur finished 3rd in the IHSA state boys tennis competition, 1965-66 season.", "IHSA, 1965-66 season", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 1958", 1958.38, null, ["sports"], "event", "MacArthur Boys Tennis: second in state", "MacArthur finished 2nd in the IHSA state boys tennis competition, 1957-58 season.", "IHSA, 1957-58 season", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 1965", 1965.38, null, ["sports"], "event", "MacArthur Boys Tennis: state champion", "MacArthur finished 1st in the IHSA state boys tennis competition, 1964-65 season.", "IHSA, 1964-65 season", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 2001", 2001.38, null, ["sports"], "event", "MacArthur Boys Track and Field (Class AA): third in state", "MacArthur finished 3rd in the IHSA state boys track and field competition, 2000-01 season (Class AA).", "IHSA, 2000-01 season", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 1986", 1986.38, null, ["sports"], "event", "MacArthur Boys Track and Field (Class AA): second in state", "MacArthur finished 2nd in the IHSA state boys track and field competition, 1985-86 season (Class AA).", "IHSA, 1985-86 season", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 2002", 2002.38, null, ["sports"], "event", "MacArthur Boys Track and Field (Class AA): second in state", "MacArthur finished 2nd in the IHSA state boys track and field competition, 2001-02 season (Class AA).", "IHSA, 2001-02 season", "https://www.ihsa.org/data/titles/d.htm"],
+  ["May 1992", 1992.38, null, ["sports"], "event", "MacArthur Boys Track and Field (Class AA): state champion", "MacArthur finished 1st in the IHSA state boys track and field competition, 1991-92 season (Class AA). Coach Bill Harbeck.", "IHSA, 1991-92 season", "https://www.ihsa.org/data/trb/records/sum-1990.htm"],
+  ["1975-76 season", 1976.1, null, ["sports"], "event", "MacArthur Drama: third in state", "MacArthur finished 3rd in the IHSA state drama competition, 1975-76 season.", "IHSA, 1975-76 season", "https://www.ihsa.org/data/titles/d.htm"],
+  ["March 1993", 1993.22, null, ["sports"], "event", "MacArthur Scholastic Bowl (Class AA): third in state", "MacArthur finished 3rd in the IHSA state scholastic bowl competition, 1992-93 season (Class AA).", "IHSA, 1992-93 season", "https://www.ihsa.org/data/titles/d.htm"],
+  ["March 1998", 1998.22, null, ["sports"], "event", "MacArthur Scholastic Bowl (Class AA): third in state", "MacArthur finished 3rd in the IHSA state scholastic bowl competition, 1997-98 season (Class AA).", "IHSA, 1997-98 season", "https://www.ihsa.org/data/titles/d.htm"],
+  ["March 1996", 1996.22, null, ["sports"], "event", "MacArthur Scholastic Bowl (Class AA): second in state", "MacArthur finished 2nd in the IHSA state scholastic bowl competition, 1995-96 season (Class AA).", "IHSA, 1995-96 season", "https://www.ihsa.org/data/titles/d.htm"],
+  ["March 1999", 1999.22, null, ["sports"], "event", "MacArthur Scholastic Bowl (Class AA): second in state", "MacArthur finished 2nd in the IHSA state scholastic bowl competition, 1998-99 season (Class AA).", "IHSA, 1998-99 season", "https://www.ihsa.org/data/titles/d.htm"],
+
+  // Labor: strikes by district unions
+  ["September 1971", 1971.7, null, ["board"], "event", "DEA: three-week \"withholding of services\"", "Decatur Education Association teachers walked out for about three weeks; teacher strikes were illegal in Illinois then, so the union called it a withholding of services. Court fights followed, including a state superintendent's motion to impose a settlement and a parents' petition for an injunction.", "Herald and Review, 7 Oct 1971, p. 3", NP(88475819)],
+  ["12 September 1986", 1986.7, 1986.77, ["board"], "event", "DEA: 18-day teachers strike", "About 900 teachers struck from 12 September to 8 October 1986, keeping 14,000 students out of school. Salary was the main issue; the three-year settlement gave average raises of 19%.", "Herald and Review, 13 Sep and 30 Dec 1986", NP(91833939)],
+  ["6 November 1991", 1991.85, null, ["board"], "event", "DEA: strike authorized, contract settled", "An hour after DEA members authorized a strike filing, a 12-hour mediation session produced a tentative two-year contract. It came a day after two incumbent board members lost their seats.", "Herald and Review, 7 Nov 1991, p. 1", NP(79714026)],
+  ["30 November 2005", 2005.91, null, ["board"], "event", "DEA: teachers strike over the school day", "DEA teachers struck after a 30 November deadline; the length of the workday (the board proposed 7.25 hours) was the main sticking point. On 1 December teachers and families marched on the Keil Administration Building chanting \"Back to school!\"", "Herald and Review, 28 Nov, 2 Dec and 6 Dec 2005", NP(79947083), "The exact start and end dates were not confirmed; the paper treated the strike as over by 11 December 2005."],
+  ["29 October 2019", 2019.83, null, ["board"], "event", "DFTA: teaching assistants strike", "The Decatur Federation of Teaching Assistants (IFT Local 4324), 275 assistants, interpreters, nurses and technicians, struck over health insurance costs. The district suspended programs at nine schools, keeping more than 500 special education and prekindergarten students out. Members returned 1 November without a contract.", "Illinois Public Media; District 61 letter, 31 Oct 2019", "https://will.illinois.edu/news/story/decatur-school-teaching-assistants-on-strike"],
+
+  ["12 September 2023", 2023.7, null, ["board"], "event", "DFTA and SEIU Local 73 security officers rally", "Teaching assistants and school security officers, both negotiating since April with expired contracts and mediators involved, rallied before a board meeting. DFTA reached a tentative agreement after its first mediation session later that month.", "Illinois Public Media; Illinois Federation of Teachers", "https://ipmnewsroom.org/the-newest-decatur-public-schools-teaching-assistants-and-security-guards-make-about-19-an-hour-tuesday-they-rallied-for-higher-wages/"],
+  ["August 2024", 2024.62, null, ["board"], "event", "SEIU Local 73 Unit A: custodians' strike notice", "The 80 custodians authorized a strike and delivered a 10-day notice, set to strike on or after 9 September 2024. They ratified a two-year contract instead ($1 an hour raise in year one, $0.50 in year two); no strike took place.", "WAND; SEIU Local 73", "https://www.wandtv.com/news/decatur-school-district-61-custodians-prepare-to-go-on-strike/article_8acf64d0-661e-11ef-83be-778078ebea37.html"],
+
+  // Integration and busing, from the Decatur papers
+  ["April 1969", 1969.28, null, ["board"], "event", "Integration-plan opponents win board seats", "Larry Hamilton and Betty Ploeger were elected; with John Fick they voiced strong opposition to the district's integration plan.", "Herald and Review, 10 Sep 1969, p. 3", NP(78125259)],
+  ["24 August 1969", 1969.64, null, ["board"], "event", "Parents petition to reverse busing", "A parent-led petition drive asked the board to reverse the busing part of the integration plan; two union locals backed it, and board member Larry Hamilton pledged to vote for reversal. Board member W. Robert Schwandt defended the plan.", "Herald and Review, 25 Aug 1969, p. 3", NP(77973523)],
+  ["9 September 1969", 1969.69, null, ["board"], "event", "Sit-ins against busing; call to unseat two members", "Larkdale-area parents told the board that sit-ins against busing were continuing in Decatur schools. An elementary principal asked the state superintendent to declare the seats of Hamilton and Ploeger vacant.", "Herald and Review, 10 Sep 1969, p. 3", NP(78125259)],
+  ["11 April 1970", 1970.28, null, ["board"], "event", "Board election ends the busing plan", "In the largest turnout in district history, \"neighborhood schools\" candidates John Fick and William Weaver won. The paper's headline: \"Election Results Point To Death of CCI.\" Fick called busing the only real issue.", "Herald and Review, 12 Apr 1970, p. 3", NP(79932730)],
+  ["4 June 1976", 1976.42, null, ["board"], "event", "Lakeview-area secession effort", "About 50 northeast-side residents met to discuss withdrawing the old Lakeview School District area from District 61 after the desegregation plan; the Decatur Human Relations Commission sought a meeting with the organizer.", "Herald and Review, 11 Jun 1976, p. 56", NP(77574829), "The outcome of the effort was not checked; no withdrawal appears in the district's later history."],
+
+  // Money
+  ["13 April 1999", 1999.28, null, ["money"], "event", "$64.8 million building referendum fails", "Voters rejected a bond issue to update every school building, the second straight referendum defeat.", "Herald & Review, 14 Apr 1999", null],
+  ["September 1999", 1999.7, null, ["money", "build"], "event", "Restructuring proposed after the referendum", "The superintendent proposed closing a high school and Roosevelt, laying off staff and selling Mound and Sunnyside.", "Herald & Review, 14 and 30 Sep 1999", null],
+  ["2001", 2001.45, null, ["money"], "event", "More than 100 teacher layoffs", "Layoffs came weeks before the new superintendent's first board meeting.", "Education Week, May 2001", U.ew01],
+  ["November 2010", 2010.84, null, ["money", "good"], "event", "County school sales tax passes", "Macon County voters approved a 1% school facility sales tax, 51.6% to 48.4%, by 1,151 votes of about 36,000. It paid for the high school rebuilds.", "Ballotpedia", U.ballot],
+  ["FY2018", 2018.5, null, ["money"], "event", "State financial score falls to Warning (2.90)", "Property taxes that had arrived early the year before did not, so the cash-basis books showed a dip; the money moved between years.", "FY2018 financial statements and memo", U.fs18],
+  ["June 2020", 2020.48, null, ["money"], "event", "BOLD borrowing: bonds rise 47%", "Bonds outstanding rose from $77.4 million in June 2019 to $114.0 million.", "FY2020 financial statements", U.fs20],
+  ["27 August 2020", 2020.65, null, ["money"], "event", "High school bonds refinanced", "Series 2020C refunded $62.3 million of the 2011A bonds for an economic gain of $9.68 million.", "FY2022 audit", U.audit22],
+  ["June 2021", 2021.49, null, ["money"], "event", "Debt peaks at $127.4 million; score falls to Warning (2.80)", "About $7 million of pandemic spending was not reimbursed until the next year.", "FY2021 audit", U.a21],
+  ["September 2022", 2022.7, null, ["money"], "event", "Pandemic aid approved for a new magnet school", "The state conditionally approved spending more than $39 million of pandemic aid on a new magnet school building.", "WAND", U.dansby, "The amount comes from a search summary."],
+  ["June 2024", 2024.49, null, ["money"], "event", "FY2024 deficit year", "Expenses passed revenue by $4.9 million as pandemic spending waited for reimbursement.", "FY2025 audit (prior-year column)", U.a25, "The FY2024 audit text has not been read."],
+  ["June 2025", 2025.49, null, ["money"], "event", "$26.8 million of pandemic reimbursement booked", "The last relief payments arrived; bonds stood at $115.2 million, down every year since 2021.", "FY2025 audit", U.a25, "That the FY2025 surplus is mostly late reimbursement is the research file's reading, not a statement in the audit."],
+
+  // Good news
+  ["2014 report card", 2014.85, null, ["good"], "event", "Graduation rate reaches 72.1%", "A new high under the cohort method adopted in 2011.", "Illinois Report Card", U.rc],
+  ["2015 report card", 2015.85, null, ["good"], "event", "Graduation rate reaches 74.2%", "A new high under the cohort method.", "Illinois Report Card", U.rc],
+  ["2017 report card", 2017.85, null, ["good"], "event", "Graduation rate reaches 77.7%", "A new high under the cohort method.", "Illinois Report Card", U.rc],
+  ["2020 report card", 2020.85, null, ["good"], "event", "Graduation rate reaches 79.1%", "A new high under the cohort method.", "Illinois Report Card", U.rc],
+  ["10 November 2026", 2026.83, null, ["good"], "event", "Graduation rate hits a record 85.1%", "The highest since 2011; the gap to the state is 4.7 points, Black and White students graduate at the same rate, and teacher retention is 86%.", "Illinois Report Card; WAND", U.rc26],
+  ["FY2016 to FY2025", 2016.0, 2025.5, ["good", "money"], "event", "Ten years of clean federal audits", "No federal finding, corrective action plan, material weakness or going-concern note in any year, including six years of pandemic money.", "Federal Audit Clearinghouse", U.fac],
+  ["8 December 2020", 2020.93, null, ["good", "money"], "event", "Recognition rating, 3.60 (FY2020)", "The state's top financial category.", "FY2020 financial statements", U.fs20],
+  ["15 November 2022", 2022.87, null, ["good", "money"], "event", "Recognition rating, 3.60 (FY2022)", "Clean audit opinion; the state's top financial category.", "FY2022 audit", U.a22],
+  ["14 November 2023", 2023.87, null, ["good", "money"], "event", "Recognition rating, 3.60 (FY2023)", "No material weaknesses; 155 days of cash, the most in any year read.", "FY2023 audit", U.a23],
+  ["11 November 2025", 2025.86, null, ["good", "money"], "event", "Recognition rating, 3.60 (FY2025)", "No material weaknesses identified.", "FY2025 audit", U.a25],
+  ["April 2025", 2025.28, null, ["good"], "event", "International teacher program launches", "With 120 certified vacancies (22.7%), the district began recruiting on J-1 visas through Peoria Public Schools.", "Citizen Portal", U.cp1, "From a search summary of meeting coverage."],
+  ["24 June 2025", 2025.48, null, ["good"], "event", "Teacher vacancies fall to 47", "More than 70 new teachers expected, 44 of them international.", "Citizen Portal", U.cp2, "From a search summary of meeting coverage."],
+  ["23 September 2025", 2025.73, null, ["good"], "event", "36 to 39 international teachers in place", "Public praise for the program at a board meeting.", "Citizen Portal", U.cp3, "From a search summary of meeting coverage."],
+  ["September 2026", 2026.71, null, ["good"], "event", "More than 40 international teachers in year two", "Teachers from the Philippines, the Dominican Republic, Guyana and Ghana.", "WAND; WCIA", U.wandIntl, "From a search summary."]
+];
+
+// Enrollment: [x position, students, label, estimate?]
+const ENR = [[1968.5,21700,"1968-69",1],[1969.5,21150,"1969-70",1],[1975.5,18839,"1975-76"],[1978.5,17197,"1978-79"]];
+[[1987,11676],[1988,10927],[1989,10704],[1990,12057],[1991,11997],[1992,12010],[1993,11742],[1994,11491],[1995,11158],[1996,11269],[1997,11658],[1998,11233],[1999,11082],[2000,10829],[2001,10524],[2002,10206],[2003,9801],[2004,9741],[2005,9411],[2006,9323],[2007,9059],[2008,9084],[2009,8526],[2010,8694],[2011,8585],[2012,8482],[2013,8515],[2014,8409],[2015,8442],[2016,8464],[2017,8606],[2018,8335],[2019,8311],[2020,8632],[2021,8308],[2022,7987],[2023,7572],[2024,7436],[2025,7329],[2026,7424]].forEach(([y,v]) => ENR.push([y - 0.5, v, (y-1) + "-" + String(y).slice(2)]));
+
+// Build the unified event list
+let ID = 0;
+const EVENTS = [];
+SUPTS.forEach(s => EVENTS.push({ id: ID++, date: s[3], y: s[1], y2: s[2], cats: ["supt"], kind: "term", title: s[0], desc: s[4], src: s[5], url: s[6], flag: s[7] }));
+E.forEach(e => EVENTS.push({ id: ID++, date: e[0], y: e[1], y2: e[2], cats: e[3], kind: e[4], title: e[5], desc: e[6], src: e[7], url: e[8], flag: e[9] }));
+EVENTS.sort((a, b) => a.y - b.y);
+
+const RANGES = [
+  { id: "all", label: "1855 to 2026", segs: [[1855, 1960, 0, 0.18], [1960, 2027, 0.18, 1]] },
+  { id: "modern", label: "1960 to 2026", segs: [[1960, 2027, 0, 1]] },
+  { id: "recent", label: "1990 to 2026", segs: [[1990, 2027, 0, 1]] },
+  { id: "now", label: "2010 to 2026", segs: [[2010, 2027, 0, 1]] }
+];
+
+const state = { on: new Set(CATS.map(c => c.id)), lv: new Set(Object.keys(LV)), range: "all", q: "", sel: null };
+
+const NS = "http://www.w3.org/2000/svg";
+const el = (tag, attrs = {}, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); if (parent) parent.appendChild(n); return n; };
+const svg = document.getElementById("chart");
+const tip = document.getElementById("tip");
+
+function visible(ev) {
+  if (!ev.cats.some(c => state.on.has(c))) return false;
+  if (ev.cats[0] === "sports") { const l = sportLevel(ev); if (l && !state.lv.has(l)) return false; }
+  if (state.q) { const t = (ev.title + " " + ev.desc + " " + ev.date).toLowerCase(); if (!t.includes(state.q)) return false; }
+  return true;
+}
+function primaryCat(ev) { return ev.cats.find(c => state.on.has(c)) || ev.cats[0]; }
+
+function render() {
+  const R = RANGES.find(r => r.id === state.range);
+  const y0 = R.segs[0][0], y1 = R.segs[R.segs.length - 1][1];
+  const wrapW = document.getElementById("chartWrap").clientWidth;
+  const W = Math.max(wrapW, 980), L = 150, Rm = 24, PW = W - L - Rm;
+  const X = y => { for (const [a, b, p, q] of R.segs) if (y <= b) return L + (p + (Math.max(y, a) - a) / (b - a) * (q - p)) * PW; return L + PW; };
+  svg.innerHTML = "";
+  const g = el("g", {}, svg);
+  let top = 30;
+
+  // Lanes
+  const lanes = CATS.filter(c => state.on.has(c.id));
+  const laneBoxes = [];
+  lanes.forEach(cat => {
+    const evs = EVENTS.filter(ev => primaryCat(ev) === cat.id && visible(ev) && (ev.y2 ? ev.y2 >= y0 : ev.y >= y0) && ev.y <= y1);
+    const rowsEnd = [];
+    const placed = evs.map(ev => {
+      const xa = X(Math.max(ev.y, y0)), xb = ev.y2 ? X(Math.min(ev.y2, y1)) : xa;
+      const pad = cat.id === "supt" ? 1 : (cat.id === "sports" && /^lv-/.test(ev.kind)) ? 4 : 7;
+      let r = 0;
+      if (cat.id !== "supt") { while (rowsEnd[r] !== undefined && rowsEnd[r] > xa - pad) r++; rowsEnd[r] = Math.max(xb, xa) + pad; }
+      return { ev, xa, xb, r };
+    });
+    const nRows = cat.id === "supt" ? 1 : Math.max(1, rowsEnd.length);
+    const rowH = cat.id === "supt" ? 26 : 17;
+    const h = Math.max(36, nRows * rowH + 14);
+    laneBoxes.push({ cat, top, h, placed, rowH });
+    top += h + 8;
+  });
+
+  const chartTop = top + 6, eh = 150;
+  const H = chartTop + eh + 40;
+  svg.setAttribute("width", W); svg.setAttribute("height", H); svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+
+  // Grid and axis
+  const ticks = [];
+  for (const [a, b, p, q] of R.segs) {
+    const span = b - a, step = span > 80 ? 40 : span > 40 ? 10 : span > 20 ? 5 : 2;
+    if (span > 80) { [1855, 1900, 1930].forEach(t => ticks.push(t)); continue; }
+    for (let t = Math.ceil(a / step) * step; t <= Math.min(b, 2026); t += step) if (!ticks.includes(t)) ticks.push(t);
+  }
+  const grid = el("g", { class: "grid" }, g), axis = el("g", { class: "axis" }, g);
+  ticks.forEach(t => { const x = X(t); el("line", { x1: x, x2: x, y1: 22, y2: H - 30 }, grid); const tx = el("text", { x, y: 14, "text-anchor": "middle" }, axis); tx.textContent = t; const bx = el("text", { x, y: H - 12, "text-anchor": "middle" }, axis); bx.textContent = t; });
+  if (R.segs.length > 1) { const xb = X(1960); el("path", { d: `M${xb - 4} 27 l4 -6 l4 6 M${xb - 4} ${H - 33} l4 6 l4 -6`, stroke: "var(--muted)", fill: "none" }, g); }
+
+  // Lanes draw
+  laneBoxes.forEach(({ cat, top, h, placed, rowH }) => {
+    el("rect", { x: 0, y: top, width: W, height: h, fill: cat.color, opacity: 0.05 }, g);
+    const lt = el("text", { x: 12, y: top + 18, class: "lane-label" }, g); lt.textContent = cat.name;
+    if (cat.name.length > 16) { const w = cat.name.split(" "); const k = cat.id === "board" ? 2 : Math.ceil(w.length / 2); lt.textContent = w.slice(0, k).join(" "); const l2 = el("text", { x: 12, y: top + 32, class: "lane-label" }, g); l2.textContent = w.slice(k).join(" "); }
+    placed.forEach(({ ev, xa, xb, r }) => {
+      const cy = top + 12 + r * rowH + rowH / 2 - (cat.id === "supt" ? 0 : 2);
+      const m = el("g", { class: "mark" + (state.sel === ev.id ? " sel" : ""), tabindex: 0, role: "button", "aria-label": ev.date + ": " + ev.title, "data-id": ev.id }, g);
+      if (cat.id === "supt") {
+        const w = Math.max(3, xb - xa - 1);
+        el("rect", { class: "shape", x: xa, y: top + 8, width: w, height: 22, rx: 3, fill: cat.color, opacity: /interim/i.test(ev.title) ? 0.55 : 1 }, m);
+        const last = ev.title.replace(/^Dr\. /, "").replace(/ \(.*\)$/, "").split(" and ")[0].split(" ").pop();
+        if (w > last.length * 6.4 + 8) { const t = el("text", { x: xa + 5, y: top + 23, class: "supt-label" }, m); t.textContent = last; }
+      } else if (ev.y2) {
+        el("rect", { class: "shape", x: xa, y: cy - 4, width: Math.max(6, xb - xa), height: 8, rx: 3, fill: cat.color }, m);
+      } else if (ev.kind === "open") {
+        el("path", { class: "shape", d: `M${xa} ${cy - 7} L${xa + 7} ${cy + 5} L${xa - 7} ${cy + 5} Z`, fill: cat.color }, m);
+      } else if (ev.kind === "close") {
+        el("rect", { class: "shape", x: xa - 5.5, y: cy - 5.5, width: 11, height: 11, fill: cat.color }, m);
+      } else if (ev.kind === "demo") {
+        el("rect", { x: xa - 7, y: cy - 7, width: 14, height: 14, fill: "transparent" }, m);
+        el("path", { class: "shape", d: `M${xa - 5} ${cy - 5} L${xa + 5} ${cy + 5} M${xa + 5} ${cy - 5} L${xa - 5} ${cy + 5}`, stroke: cat.color, "stroke-width": 3, fill: "none", style: "stroke:" + cat.color }, m);
+      } else if (cat.id === "sports" && LV[sportLevel(ev)]) {
+        const lv = LV[sportLevel(ev)];
+        if (lv.star) { const pts = []; for (let i = 0; i < 10; i++) { const r = i % 2 ? 3.4 : 8, a = -Math.PI / 2 + i * Math.PI / 5; pts.push((xa + r * Math.cos(a)).toFixed(1) + "," + (cy + r * Math.sin(a)).toFixed(1)); } el("polygon", { class: "shape", points: pts.join(" "), fill: lv.color }, m); }
+        else el("circle", { class: "shape", cx: xa, cy, r: lv.r, fill: lv.color }, m);
+      } else if (/state champion$/.test(ev.title)) {
+        const pts = []; for (let i = 0; i < 10; i++) { const r = i % 2 ? 3.4 : 8, a = -Math.PI / 2 + i * Math.PI / 5; pts.push((xa + r * Math.cos(a)).toFixed(1) + "," + (cy + r * Math.sin(a)).toFixed(1)); }
+        el("polygon", { class: "shape", points: pts.join(" "), fill: cat.color }, m);
+      } else {
+        el("circle", { class: "shape", cx: xa, cy, r: 6, fill: cat.color }, m);
+      }
+      if (ev.flag) el("circle", { cx: xa + 6, cy: cy - 6, r: 2.5, fill: "var(--flag)" }, m);
+    });
+  });
+
+  // Enrollment chart
+  const vmax = 22000;
+  const Y = v => chartTop + eh - (v / vmax) * eh;
+  el("rect", { x: 0, y: chartTop - 6, width: W, height: eh + 14, fill: "var(--c-enroll)", opacity: 0.04 }, g);
+  const et = el("text", { x: 12, y: chartTop + 12, class: "lane-label" }, g); et.textContent = "Enrollment";
+  const et2 = el("text", { x: 12, y: chartTop + 26, class: "lane-label" }, g); et2.textContent = "K-12 students";
+  [0, 5000, 10000, 15000, 20000].forEach(v => { el("line", { x1: L, x2: W - Rm, y1: Y(v), y2: Y(v), stroke: "var(--rule)" }, g); const t = el("text", { x: L - 6, y: Y(v) + 4, "text-anchor": "end", class: "axis" }, g); t.setAttribute("font-size", "11"); t.setAttribute("fill", "var(--muted)"); t.textContent = v.toLocaleString("en-US"); });
+  const pts = ENR.filter(p => p[0] >= y0 - 1 && p[0] <= y1);
+  if (pts.length) {
+    // Draw segments, breaking the line across the 1979-1986 gap with a dashed connector
+    const solid = [], gaps = [];
+    for (let i = 0; i < pts.length; i++) { if (i && pts[i][0] - pts[i - 1][0] > 2) gaps.push([pts[i - 1], pts[i]]); }
+    let d = ""; pts.forEach((p, i) => { const jump = i && p[0] - pts[i - 1][0] > 2; d += (i === 0 || jump ? "M" : "L") + X(p[0]) + " " + Y(p[1]); });
+    gaps.forEach(([a, b]) => el("path", { d: `M${X(a[0])} ${Y(a[1])} L${X(b[0])} ${Y(b[1])}`, stroke: "var(--c-enroll)", "stroke-dasharray": "3 4", fill: "none", opacity: 0.6 }, g));
+    el("path", { d, stroke: "var(--c-enroll)", "stroke-width": 2.2, fill: "none" }, g);
+    pts.forEach(p => {
+      const c = el("circle", { cx: X(p[0]), cy: Y(p[1]), r: 3.2, fill: p[3] ? "var(--panel)" : "var(--c-enroll)", stroke: "var(--c-enroll)", "stroke-width": 1.5 }, g);
+      c.addEventListener("mousemove", e => showTip(e, `${p[2]}: ${p[1].toLocaleString("en-US")} students${p[3] ? " (estimate)" : ""}`));
+      c.addEventListener("mouseleave", hideTip);
+    });
+    const lab = (p, txt, dy) => { if (!p) return; const t = el("text", { x: X(p[0]) + 6, y: Y(p[1]) + dy, "font-size": 11, "font-weight": 600, fill: "var(--ink)" }, g); t.textContent = txt; };
+    const first = pts[0], last = pts[pts.length - 1];
+    lab(first, `${first[1].toLocaleString("en-US")}${first[3] ? " (est.)" : ""} in ${first[2]}`, -8);
+    { const t = el("text", { x: X(last[0]) - 6, y: Y(last[1]) + 18, "text-anchor": "end", "font-size": 11, "font-weight": 600, fill: "var(--ink)" }, g); t.textContent = `${last[1].toLocaleString("en-US")} in ${last[2]}`; }
+    if (last[0] - 4 > 0) { const t = el("text", { x: X(last[0]) - 6, y: Y(last[1]) + 32, "text-anchor": "end", "font-size": 11, fill: "var(--muted)" }, g); t.textContent = "projected about 6,730 by 2035-36"; }
+  }
+  if (y0 < 1968) { const t = el("text", { x: X(Math.max(y0, 1855)) + 6, y: chartTop + eh - 8, "font-size": 11, fill: "var(--muted)" }, g); t.textContent = "No enrollment counts before 1968-69 in the research file"; }
+
+  // Interactions
+  svg.querySelectorAll(".mark").forEach(m => {
+    const ev = EVENTS[EVENTS.findIndex(x => x.id === +m.dataset.id)];
+    m.addEventListener("click", () => select(ev.id, true));
+    m.addEventListener("keydown", k => { if (k.key === "Enter" || k.key === " ") { k.preventDefault(); select(ev.id, true); } });
+    m.addEventListener("mousemove", e => showTip(e, `${ev.date}: ${ev.title}`));
+    m.addEventListener("mouseleave", hideTip);
+  });
+  renderList();
+}
+
+function showTip(e, text) { tip.textContent = text; tip.style.display = "block"; const x = Math.min(e.clientX + 12, window.innerWidth - 290); tip.style.left = x + "px"; tip.style.top = (e.clientY + 14) + "px"; }
+function hideTip() { tip.style.display = "none"; }
+
+function select(id, fromChart) {
+  state.sel = id;
+  const ev = EVENTS.find(x => x.id === id);
+  const d = document.getElementById("detail");
+  const chips = ev.cats.map(c => `<span style="--c:${CAT[c].color}" class="dot"></span>${CAT[c].name}`).join(" &middot; ");
+  d.innerHTML = `<div class="kicker">${chips}</div>
+    <div class="date">${ev.date}</div>
+    <h3>${ev.title}</h3>
+    <p>${ev.desc}</p>
+    <div class="src">Source: ${ev.url ? `<a href="${ev.url}" target="_blank" rel="noopener">${ev.src}</a>` : ev.src}</div>
+    ${ev.flag ? `<div class="flag"><strong>Unconfirmed or estimate.</strong> ${ev.flag}</div>` : ""}`;
+  document.querySelectorAll(".mark").forEach(m => m.classList.toggle("sel", +m.dataset.id === id));
+  document.querySelectorAll(".row").forEach(r => r.classList.toggle("sel", +r.dataset.id === id));
+  if (fromChart) { const row = document.querySelector(`.row[data-id="${id}"]`); const box = document.getElementById("rows"); if (row) box.scrollTop = row.offsetTop - box.offsetTop - box.clientHeight / 3; }
+  else { const m = document.querySelector(`.mark[data-id="${id}"]`); if (m) { const wrap = document.getElementById("chartWrap"); const bb = m.getBBox(); if (bb.x < wrap.scrollLeft || bb.x > wrap.scrollLeft + wrap.clientWidth) wrap.scrollLeft = bb.x - wrap.clientWidth / 2; } }
+}
+
+function renderList() {
+  const R = RANGES.find(r => r.id === state.range);
+  const y0 = R.segs[0][0];
+  const list = EVENTS.filter(ev => visible(ev) && (ev.y2 || ev.y) >= y0);
+  document.getElementById("count").textContent = `${list.length} of ${EVENTS.length} entries shown`;
+  const rows = document.getElementById("rows");
+  rows.innerHTML = list.map(ev => `<div class="row${state.sel === ev.id ? " sel" : ""}" role="listitem" tabindex="0" data-id="${ev.id}">
+    <span class="d">${ev.date}</span>
+    <span class="c">${ev.cats.map(c => `<span class="dot" style="--c:${(c === "sports" && sportLevel(ev)) ? LV[sportLevel(ev)].color : CAT[c].color}"></span>`).join("")} ${(ev.cats[0] === "sports" && sportLevel(ev)) ? LV[sportLevel(ev)].name : CAT[ev.cats[0]].name}</span>
+    <span class="t">${ev.title}${ev.flag ? ' <span style="color:var(--flag);font-size:12px">&#9679; unconfirmed</span>' : ""}<small>${ev.desc}</small></span></div>`).join("");
+  rows.querySelectorAll(".row").forEach(r => {
+    r.addEventListener("click", () => select(+r.dataset.id, false));
+    r.addEventListener("keydown", k => { if (k.key === "Enter" || k.key === " ") { k.preventDefault(); select(+r.dataset.id, false); } });
+  });
+}
+
+// Controls
+const catsBox = document.getElementById("cats");
+CATS.forEach(c => {
+  const b = document.createElement("button");
+  b.className = "chip"; b.type = "button"; b.id = "cat-" + c.id; b.style.setProperty("--c", c.color);
+  b.setAttribute("aria-pressed", "true"); b.innerHTML = `<span class="sw"></span>${c.name}`;
+  b.addEventListener("click", () => { if (state.on.has(c.id)) { if (state.on.size > 1) state.on.delete(c.id); } else state.on.add(c.id); b.setAttribute("aria-pressed", state.on.has(c.id)); render(); });
+  catsBox.appendChild(b);
+});
+const lvBox = document.getElementById("lvls");
+Object.entries(LV).forEach(([k, l]) => {
+  const b = document.createElement("button");
+  b.className = "chip"; b.type = "button"; b.id = "lv-" + k; b.style.setProperty("--c", l.color);
+  b.setAttribute("aria-pressed", "true"); b.innerHTML = `<span class="sw"></span>${l.name}`;
+  b.addEventListener("click", () => { if (state.lv.has(k)) state.lv.delete(k); else state.lv.add(k); b.setAttribute("aria-pressed", state.lv.has(k)); render(); });
+  lvBox.appendChild(b);
+});
+const rangeBox = document.getElementById("ranges");
+RANGES.forEach(r => {
+  const b = document.createElement("button");
+  b.type = "button"; b.id = "range-" + r.id; b.textContent = r.label; b.setAttribute("aria-pressed", r.id === state.range);
+  b.addEventListener("click", () => { state.range = r.id; rangeBox.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", x === b)); render(); });
+  rangeBox.appendChild(b);
+});
+document.getElementById("q").addEventListener("input", e => { state.q = e.target.value.trim().toLowerCase(); render(); });
+let rt; window.addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(render, 120); });
+
+render();
+select(EVENTS.find(e => e.title.startsWith("Integration plan adopted")).id, true);
+</script>
+</body>
+</html>
